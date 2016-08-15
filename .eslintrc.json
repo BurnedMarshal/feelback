@@ -1,0 +1,12 @@
+{
+    "extends": "google",
+    "env":{
+        "node": true
+    },
+    "rules": {
+        "indent": [2, 4],
+        "max-len":[1,180],
+        "new-cap": ["error", { "properties": false }],
+        "camelcase": 0
+    }
+}
