@@ -4,11 +4,12 @@ const db = require('seraph')({
     user: CONFIG.username,
     pass: CONFIG.password});
 
-module.export = {
+module.exports = {
     findById: find,
     save: save,
     where: where,
-    delete: delete };
+    delete: del
+};
 
 /**
  * Retrieve User node from Neo4j using node.id
@@ -42,9 +43,16 @@ function where(query, next) {
  * @param  {Function} next callback
  */
 function save(user, next) {
-    db.save(user, 'User', function(err, user) {
-        next(err, user);
-    });
+    if (user.id) {
+        db.save(user, function(err, user) {
+            next(err, user);
+        });
+    } else {
+        // Create new node whit label User
+        db.save(user, 'User', function(err, user) {
+            next(err, user);
+        });
+    }
 }
 
 /**
@@ -52,7 +60,7 @@ function save(user, next) {
  * @param  {[type]}   user User Object
  * @param  {Function} next callback
  */
-function delete(user, next) {
+function del(user, next) {
     db.delete(user, true, function(err) {
         next(err);
     });
