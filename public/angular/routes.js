@@ -1,6 +1,6 @@
 /* global angular*/
 angular.module('feelback')
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         var lang = window.navigator.userLanguage || window.navigator.language;
       // console.log("lang:",lang);
         if (lang.length > 2) {
@@ -19,4 +19,9 @@ angular.module('feelback')
             .otherwise({
                 redirectTo: lang + '/'
             });
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
     }]);
