@@ -1,0 +1,20 @@
+{
+  "name": "feelback",
+  "description": "",
+  "main": "bin/www",
+  "authors": [
+    "Daniele Manni"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/BurnedMarshal/feelback",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "satellizer": "^0.15.4"
+  }
+}
