@@ -13,24 +13,25 @@ link(href='/stylesheets/page-center.css', type='text/css', rel='stylesheet', med
         .input-field.col.s12.center
           img.circle.responsive-img.valign.profile-image-login(src='/images/login-logo.png', alt='')
           p.center.login-form-text Material Design Admin Template
-      .row.margin
+      //.row.margin
         .input-field.col.s12
           i.mdi-social-person-outline.prefix
           input#username(type='text')
           label.center-align(for='username') Username
-      .row.margin
+      //.row.margin
         .input-field.col.s12
           i.mdi-action-lock-outline.prefix
           input#password(type='password')
           label(for='password') Password
-      .row
+      //.row
         .input-field.col.s12.m12.l12.login-text
           input#remember-me(type='checkbox')
           label(for='remember-me') Remember me
       .row
         .input-field.col.s12
-          button.btn.waves-effect.waves-light.col.s12(ng-click="authenticate('facebook')") Login
-      .row
+          div.btn.waves-effect.waves-light.col.s12.light-blue(ng-click="authenticate('facebook')") Login
+            img.left(src='/images/facebook-white.png', height='36px')
+      //.row
         .input-field.col.s6.m6.l6
           p.margin.medium-small
             a(href='page-register.html') Register Now!
