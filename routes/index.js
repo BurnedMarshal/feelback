@@ -24,6 +24,10 @@ function createJWT(user) {
     return jwt.encode(payload, '50dbec6c87f79f03484f92906d1b9d1e');
 }
 
+router.get('/error', function(req, res, next) {
+    res.render('error', {});
+});
+
 router.get('/home', function(req, res, next) {
     res.render('templates/home', {});
 });

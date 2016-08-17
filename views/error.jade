@@ -1,6 +1,79 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+doctype html
+html(lang='en')
+  //
+    ================================================================================
+    Item Name: Materialize - Material Design Admin Template
+    Version: 1.0
+    Author: GeeksLabs
+    Author URL: http://www.themeforest.net/user/geekslabs
+    ================================================================================
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='msapplication-tap-highlight', content='no')
+    meta(name='description', content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ")
+    meta(name='keywords', content='materialize, admin template, dashboard template, flat admin template, responsive admin template,')
+    title 500 Error Page | Materialize - Material Design Admin Template
+    // Favicons
+    link(rel='icon', href='/images/favicon/favicon-32x32.png', sizes='32x32')
+    // Favicons
+    link(rel='apple-touch-icon-precomposed', href='/images/favicon/apple-touch-icon-152x152.png')
+    // For iPhone
+    meta(name='msapplication-TileColor', content='#00bcd4')
+    meta(name='msapplication-TileImage', content='/images/favicon/mstile-144x144.png')
+    // For Windows Phone
+    // CORE CSS
+    link(href='/stylesheets/materialize.css', type='text/css', rel='stylesheet', media='screen,projection')
+    link(href='/stylesheets/style.css', type='text/css', rel='stylesheet', media='screen,projection')
+    link(href='/stylesheets/page-center.css', type='text/css', rel='stylesheet', media='screen,projection')
+    // INCLUDED PLUGIN CSS ON THIS PAGE
+    link(href='/stylesheets/prism.css', type='text/css', rel='stylesheet', media='screen,projection')
+    link(href='/javascripts/plugins/perfect-scrollbar/perfect-scrollbar.css', type='text/css', rel='stylesheet', media='screen,projection')
+  body.cyan
+    // Start Page Loading
+    #loader-wrapper
+      #loader
+      .loader-section.section-left
+      .loader-section.section-right
+    // End Page Loading
+    #error-page
+      .row
+        .col.s12
+          .browser-window
+            .top-bar
+              .circles
+                #close-circle.circle
+                #minimize-circle.circle
+                #maximize-circle.circle
+            .content
+              .row
+                #site-layout-example-top.col.s12
+                  p.flat-text-logo.center.white-text.caption-uppercase Internal server error
+                #site-layout-example-right.col.s12.m12.l12
+                  .row.center
+                    h1.text-long-shadow.col.s12 500
+                  .row.center
+                    p.center.white-text.col.s12 Something has gone seriously wrong. Please try later.
+                    p.center.s12
+                      button.btn.waves-effect.waves-light(onclick='goBack()') Back
+                      a.btn.waves-effect.waves-light(href='/') Homepage
+                    p
+    //
+      ================================================
+      Scripts
+      ================================================
+    // jQuery Library
+    script(type='text/javascript', src='/javascripts/jquery-1.11.2.min.js')
+    // materialize js
+    script(type='text/javascript', src='/javascripts/materialize.js')
+    // prism
+    script(type='text/javascript', src='/javascripts/prism.js')
+    // scrollbar
+    script(type='text/javascript', src='/javascripts/plugins/perfect-scrollbar/perfect-scrollbar.min.js')
+    // plugins.js - Some Specific JS codes for Plugin Settings
+    script(type='text/javascript', src='/javascripts/plugins.js')
+    script(type='text/javascript').
+      function goBack() {
+      window.history.back();
+      }

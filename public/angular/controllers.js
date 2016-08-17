@@ -63,11 +63,10 @@ angular.module('feelback')
         $scope.authenticate = function(provider) {
             $auth.authenticate(provider)
               .then(function(response) {
-                  console.log('response: ', response);
                   $location.path('/' + $scope.lang);
               })
               .catch(function(response) {
-                  console.log('response:', response);
+                  window.location = window.location.origin + '/error';
               });
         };
     }]);
