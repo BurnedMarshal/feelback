@@ -9,6 +9,18 @@ angular.module('feelback', ['ngRoute', 'pascalprecht.translate', 'satellizer'])
 
         $authProvider.facebook({
             clientId: '279341862458487',
-            responseType: 'token'
+            // responseType: 'token',
+            requiredUrlParams: ['display', 'scope'],
+            scope: ['email', 'user_friends', 'user_hometown', 'user_location', 'user_birthday', 'user_work_history'],
+            scopeDelimiter: ','
+            // url: '/auth/facebook',
+            /* authorizationEndpoint: 'https://www.facebook.com/v2.7/dialog/oauth',
+            redirectUri: window.location.origin + '/',
+            requiredUrlParams: ['display', 'scope'],
+            scope: ['email'],
+            scopeDelimiter: ',',
+            display: 'popup',
+            oauthType: '2.0'// ,
+            // popupOptions: {width: 580, height: 400}*/
         });
     }]);

@@ -26,10 +26,15 @@ angular.module('feelback')
             }
         });
 
+        $scope.loggedIn = function() {
+            return $auth.isAuthenticated();
+        };
+
         $scope.logout = function() {
             console.log('logout process');
-            $auth.logout();
-            $location.path('/' + $scope.lang);
+            $auth.logout().then(function() {
+                $location.path('/' + $scope.lang);
+            });
         };
     }])
     .controller('homeController', ['$scope', '$auth', function($scope, $auth) {
@@ -47,12 +52,6 @@ angular.module('feelback')
                 alignment: 'left' // Displays dropdown with edge aligned to the left of button
             });
         }, 10);
-
-        $scope.loggedIn = false;
-
-        if ($auth.isAuthenticated()) {
-            $scope.loggedIn = true;
-        }
     }])
     .controller('loginController', ['$scope', '$auth', '$location', function($scope, $auth, $location) {
         // $('body').removeClass('loaded');
@@ -64,7 +63,11 @@ angular.module('feelback')
         $scope.authenticate = function(provider) {
             $auth.authenticate(provider)
               .then(function(response) {
+                  console.log('response: ', response);
                   $location.path('/' + $scope.lang);
+              })
+              .catch(function(response) {
+                  console.log('response:', response);
               });
         };
     }]);

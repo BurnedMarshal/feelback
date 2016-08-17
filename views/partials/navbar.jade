@@ -21,7 +21,7 @@ header#header.page-topbar
                 i.mdi-navigation-more-vert
               ul#login-dropdown.dropdown-content
                 li
-                  a.-text(ng-href='/{{lang}}/login', ng-if='!loggedIn') Login
-                  a.-text(href='#!', ng-click='logout()' ng-if='loggedIn') Logout
+                  a.-text(ng-href='/{{lang}}/login', ng-if='!loggedIn()') Login
+                  a.-text(href='#!', ng-click='logout()' ng-if='loggedIn()') Logout
   // end header nav
 // END HEADER
