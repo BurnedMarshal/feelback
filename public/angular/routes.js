@@ -16,6 +16,10 @@ angular.module('feelback')
                 templateUrl: '/home',
                 controller: 'homeController'
             })
+            .when('/:lang/login', {
+                templateUrl: '/login',
+                controller: 'loginController'
+            })
             .otherwise({
                 redirectTo: lang + '/'
             });

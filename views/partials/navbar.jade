@@ -1,0 +1,27 @@
+// START HEADER
+header#header.page-topbar
+  // start header nav
+  .navbar-fixed
+    nav.cyan
+      .nav-wrapper
+        .col.s12
+          a.brand-logo(ng-href='/{{lang}}') Logo
+          ul.right.hide-on-med-and-down
+            li
+              a(href='sass.html')
+                i.mdi-action-search
+            li
+              a(href='components.html')
+                i.mdi-action-view-module
+            li
+              a(href='javascript.html')
+                i.mdi-navigation-refresh
+            li
+              a.dropdown-button(href='#!', data-activates='login-dropdown')
+                i.mdi-navigation-more-vert
+              ul#login-dropdown.dropdown-content
+                li
+                  a.-text(ng-href='/{{lang}}/login', ng-if='!loggedIn') Login
+                  a.-text(href='#!', ng-click='logout()' ng-if='loggedIn') Logout
+  // end header nav
+// END HEADER
