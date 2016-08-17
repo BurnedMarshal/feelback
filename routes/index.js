@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 const User = require('../models/user');
+const CONFIG = require('../conf/config');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 
@@ -21,7 +22,7 @@ function createJWT(user) {
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     };
-    return jwt.encode(payload, 'c1ad7fde3a183d38d09f985b08247f5f');
+    return jwt.encode(payload, CONFIG.secret);
 }
 
 router.get('/error', function(req, res, next) {
@@ -48,7 +49,7 @@ router.post('/auth/facebook', function(req, res) {
     var params = {
         code: req.body.code,
         client_id: req.body.clientId,
-        client_secret: 'c1ad7fde3a183d38d09f985b08247f5f',
+        client_secret: CONFIG.secret,
         redirect_uri: req.body.redirectUri
     };
 
@@ -69,7 +70,7 @@ router.post('/auth/facebook', function(req, res) {
                         return res.status(409).send({message: 'There is already a Facebook account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, 'c1ad7fde3a183d38d09f985b08247f5f');
+                    var payload = jwt.decode(token, CONFIG.secret);
                     console.log(payload);
                     return res.status(500).send({message: 'Function not supported'});
                     /* User.findById(payload.sub, function(err, user) {

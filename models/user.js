@@ -1,4 +1,4 @@
-const CONFIG = require('../conf/database');
+const CONFIG = require('../conf/config');
 const db = require('seraph')({
     server: CONFIG.database,
     user: CONFIG.username,
