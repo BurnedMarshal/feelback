@@ -21,7 +21,7 @@ function createJWT(user) {
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     };
-    return jwt.encode(payload, '50dbec6c87f79f03484f92906d1b9d1e');
+    return jwt.encode(payload, 'c1ad7fde3a183d38d09f985b08247f5f');
 }
 
 router.get('/error', function(req, res, next) {
@@ -48,7 +48,7 @@ router.post('/auth/facebook', function(req, res) {
     var params = {
         code: req.body.code,
         client_id: req.body.clientId,
-        client_secret: '50dbec6c87f79f03484f92906d1b9d1e',
+        client_secret: 'c1ad7fde3a183d38d09f985b08247f5f',
         redirect_uri: req.body.redirectUri
     };
 
@@ -69,7 +69,7 @@ router.post('/auth/facebook', function(req, res) {
                         return res.status(409).send({message: 'There is already a Facebook account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, '50dbec6c87f79f03484f92906d1b9d1e');
+                    var payload = jwt.decode(token, 'c1ad7fde3a183d38d09f985b08247f5f');
                     console.log(payload);
                     return res.status(500).send({message: 'Function not supported'});
                     /* User.findById(payload.sub, function(err, user) {
