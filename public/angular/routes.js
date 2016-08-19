@@ -20,6 +20,10 @@ angular.module('feelback')
                 templateUrl: '/login',
                 controller: 'loginController'
             })
+            .when('/:lang/users/:id', {
+                templateUrl: '/user',
+                controller: 'userController'
+            })
             .otherwise({
                 redirectTo: lang + '/'
             });

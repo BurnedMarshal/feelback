@@ -11,10 +11,10 @@ var moment = require('moment');
     res.render('index', {});
 });*/
 
-/*
- |--------------------------------------------------------------------------
- | Generate JSON Web Token
- |--------------------------------------------------------------------------
+/**
+ * Generate JSON Web Token
+ * @param  {[object]} user User object
+ * @return {[string]}      JWT generated
  */
 function createJWT(user) {
     var payload = {
@@ -38,7 +38,7 @@ router.get('/login', function(req, res, next) {
 });
 
 /* GET index page angular. */
-router.get('/:lang?/:route?', function(req, res, next) {
+router.get('/:lang?/:route?/:id?', function(req, res, next) {
     res.render('index', {});
 });
 
@@ -55,17 +55,26 @@ router.post('/auth/facebook', function(req, res) {
 
   // Step 1. Exchange authorization code for access token.
     request.get({url: accessTokenUrl, qs: params, json: true}, function(err, response, accessToken) {
+        if (err) {
+            return res.status(500).send({message: 'Internal server error'});
+        }
         if (response.statusCode !== 200) {
             return res.status(500).send({message: accessToken.error.message});
         }
 
     // Step 2. Retrieve profile information about the current user.
         request.get({url: graphApiUrl, qs: accessToken, json: true}, function(err, response, profile) {
+            if (err) {
+                return res.status(500).send({message: 'Internal server error'});
+            }
             if (response.statusCode !== 200) {
                 return res.status(500).send({message: profile.error.message});
             }
             if (req.header('Authorization')) {
                 User.where({id: profile.id}, function(err, existingUser) {
+                    if (err) {
+                        return res.status(500).send({message: 'Internal server error'});
+                    }
                     if (existingUser) {
                         return res.status(409).send({message: 'There is already a Facebook account that belongs to you'});
                     }
