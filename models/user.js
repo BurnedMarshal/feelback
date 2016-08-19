@@ -9,7 +9,8 @@ module.exports = {
     findById: find,
     save: save,
     where: where,
-    delete: del
+    delete: del,
+    judge: judge
 };
 
 /**
@@ -67,5 +68,30 @@ function save(user, next) {
 function del(user, next) {
     db.delete(user, true, function(err) {
         next(err);
+    });
+}
+
+/**
+ * Create judge relationship between two users
+ * @param  {[object]}   referee [description]
+ * @param  {[object]}   judged  [description]
+ * @param  {[object]}   value   [description]
+ * @param  {Function} next    [callback]
+ */
+function judge(referee, judged, value, next) {
+    var cypher = `START referee = node(${referee.id}), judged = node(${judged.id}) ` +
+         "CREATE UNIQUE (referee)-[r:judge]->(judged) " +
+         "RETURN r ";
+    console.log(cypher);
+
+    db.query(cypher, function(err, relationship) {
+        if (err) {
+            next(err, relationship);
+        } else {
+            relationship[0].properties = value;
+            db.rel.update(relationship[0], err => {
+                next(err, relationship[0]);
+            });
+        }
     });
 }

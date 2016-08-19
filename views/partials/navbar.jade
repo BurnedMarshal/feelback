@@ -7,8 +7,10 @@ header#header.page-topbar
         .col.s12
           a.brand-logo(ng-href='/{{lang}}') Logo
           ul.right.hide-on-med-and-down
+            li.search-out(style='display: none;')
+              input.search-out-text(type='text')
             li
-              a(href='sass.html')
+              a.waves-effect.waves-block.waves-light.show-search(href='javascript:void(0);')
                 i.mdi-action-search
             li
               a(href='components.html')
