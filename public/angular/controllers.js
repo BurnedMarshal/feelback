@@ -91,6 +91,7 @@ angular.module('feelback')
         $('body').removeClass('loaded');
         $('body').removeClass('cyan');
         setTimeout(function() {
+            $('#slide-out').perfectScrollbar();
             $('.dropdown-button').dropdown({
                 inDuration: 300,
                 outDuration: 225,
