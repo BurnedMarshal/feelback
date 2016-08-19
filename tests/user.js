@@ -20,6 +20,7 @@ test('UPDATE User', t => {
     User.save(newUser, function(err, user) {
         t.error(err, 'no error updating user');
         createdResource = user;
+        newUser.uuid = user.uuid;
         t.deepEquals(newUser, user, 'User object succefflully updated');
         t.end();
     });
@@ -27,7 +28,7 @@ test('UPDATE User', t => {
 
 test('FIND User', t => {
     var newUser = createdResource;
-    User.where({name: newUser.name}, function(err, users) {
+    User.where({uuid: newUser.uuid}, function(err, users) {
         t.error(err, 'no error searcing user');
         t.deepEquals(newUser, users[0], 'User object succefflully updated');
         t.test('DELETE User', t => {

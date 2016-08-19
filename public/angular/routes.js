@@ -21,7 +21,7 @@ angular.module('feelback')
                 controller: 'loginController'
             })
             .when('/:lang/users/:id', {
-                templateUrl: '/user',
+                templateUrl: '/users',
                 controller: 'userController'
             })
             .otherwise({

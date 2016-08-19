@@ -36,7 +36,7 @@ angular.module('feelback')
             });
         };
     }])
-    .controller('homeController', ['$scope', '$auth', function($scope, $auth) {
+    .controller('homeController', ['$scope', '$auth', 'Account', function($scope, $auth, Account) {
         console.log('homeController');
         $('body').removeClass('cyan');
         $('body').removeClass('loaded');
@@ -51,17 +51,34 @@ angular.module('feelback')
                 alignment: 'left' // Displays dropdown with edge aligned to the left of button
             });
         }, 10);
+        $scope.getProfile = function() {
+            Account.getProfile()
+              .then(function(response) {
+                  $scope.user = response.data;
+                  console.log($scope.user);
+              })
+              .catch(function(response) {
+                  console.error(response);
+              });
+        };
+
+        if ($auth.isAuthenticated()) {
+            console.log($auth.getToken());
+            $scope.getProfile();
+        }
     }])
-    .controller('loginController', ['$scope', '$auth', '$location', function($scope, $auth, $location) {
+    .controller('loginController', ['$scope', '$auth', '$location', 'Account', function($scope, $auth, $location, Account) {
         // $('body').removeClass('loaded');
         console.log('loginController');
         $('body').addClass('cyan');
         if ($auth.isAuthenticated()) {
             $location.path('/' + $scope.lang);
         }
+
         $scope.authenticate = function(provider) {
             $auth.authenticate(provider)
               .then(function(response) {
+                  $auth.setToken(response.data.token);
                   $location.path('/' + $scope.lang);
               })
               .catch(function(response) {

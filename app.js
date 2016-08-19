@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const userAPI = require('./routes/api/v1/user');
 
 var app = express();
 
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 // app.use(express.static(path.join(__dirname, '/../public')));
 // app.use(express.static(path.join(__dirname, '/../bower_components')));
 
-app.use('/user', users);
+app.use('/api/v1/users', userAPI);
+app.use('/users', users);
 app.use('/auth', auth);
 app.use('/', routes);
 

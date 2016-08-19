@@ -1,3 +1,4 @@
+var uuid = require('node-uuid');
 const CONFIG = require('../conf/config');
 const db = require('seraph')({
     server: CONFIG.database,
@@ -17,8 +18,10 @@ module.exports = {
  * @param  {Function} next   [callback]
  */
 function find(userId, next) {
-    db.find({id: userId}, false, 'User', function(err, users) {
-        if (users.length === 1) {
+    console.log('USER_ID: ', userId);
+    db.find({uuid: userId}, false, 'User', function(err, users) {
+        console.log('Cosa ho trovato? --->', users);
+        if (users && users.length === 1) {
             next(err, users[0]);
         } else {
             next(err, null); // User not found
@@ -49,6 +52,7 @@ function save(user, next) {
         });
     } else {
         // Create new node whit label User
+        user.uuid = uuid.v1();
         db.save(user, 'User', function(err, user) {
             next(err, user);
         });
