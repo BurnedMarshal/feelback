@@ -5,8 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const routes = require('./routes/index');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 // app.use(express.static(path.join(__dirname, '/../bower_components')));
 
 app.use('/user', users);
+app.use('/auth', auth);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
