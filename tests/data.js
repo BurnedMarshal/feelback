@@ -41,8 +41,10 @@ test('RANDOM Evaluations', t => {
                     etical: Math.floor((Math.random() * 5) + 1),
                     personal: Math.floor((Math.random() * 5) + 1)
                 };
+                var expectedAverage = (vote.professional + vote.etical + vote.personal) / 3;
                 User.judge(createdUsers[referee], createdUsers[judjed], vote, function(err, relationship) {
                     t.error(err, 'no error creating relationship');
+                    vote.average = expectedAverage;
                     t.deepEquals(relationship, {
                         start: createdUsers[referee].id,
                         end: createdUsers[judjed].id,
