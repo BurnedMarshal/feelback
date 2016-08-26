@@ -6,4 +6,11 @@ angular.module('feelback')
               return $http.get('/api/v1/users/me');
           }
       };
+  }])
+  .factory('User', ['$http', function($http) {
+      return {
+          get: function(id) {
+              return $http.get('/api/v1/users/' + id);
+          }
+      };
   }]);

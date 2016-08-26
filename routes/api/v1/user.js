@@ -12,4 +12,18 @@ router.get('/me', auth.ensureAuthenticated, function(req, res) {
     });
 });
 
+router.get('/:id', function(req, res) {
+    console.log(req.params.id);
+    User.findById(req.params.id, function(err, user) {
+        if (err) {
+            return res.status(500).send({message: 'Internal server error'});
+        }
+        if (user) {
+            res.send(user);
+        } else {
+            res.status(404).send({message: 'User not found'});
+        }
+    });
+});
+
 module.exports = router;
