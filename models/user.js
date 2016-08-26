@@ -10,7 +10,8 @@ module.exports = {
     save: save,
     where: where,
     delete: del,
-    judge: judge
+    judge: judge,
+    judgements: judgements
 };
 
 /**
@@ -100,6 +101,69 @@ function judge(referee, judged, value, next) {
             relationship[0].properties = value;
             db.rel.update(relationship[0], err => {
                 next(err, relationship[0]);
+            });
+        }
+    });
+}
+
+/**
+ * Return judgements from one user to another
+ * @param  {[type]}   startUserId [description]
+ * @param  {[type]}   endUserId   [description]
+ * @param  {Function} next        [description]
+ */
+function judgements(startUserId, endUserId, next) {
+    var directCypher = `START a=node(${startUserId}), b=node(${endUserId}) ` +
+    "MATCH p=(a)-[r:judge]->(b) " +
+    "RETURN r";
+    db.query(directCypher, {}, function(err, results) {
+        if (err) {
+            return next(err, null);
+        }
+        if (results && results.r) {
+            next(null, results.r);
+        } else {
+            var cypher = `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
+            "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(b) " +
+            "WHERE NOT((a)-[:judge]->(b)) AND r1.average >= 3 " +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
+            "UNION " +
+            `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
+            "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(b) " +
+            "WHERE NOT((a)-[:judge]->(b)) AND r1.average >= 3 AND r2.average >=3 " +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
+            "UNION " +
+            `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
+            "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(x3)-[r4:judge]->(b) " +
+            "WHERE NOT((a)-[:judge]->(b)) AND NOT(x1.id = x3.id) AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3" +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement ";
+            db.query(cypher, {}, function(err, results) {
+                'use strict';
+                if (err) {
+                    return next(err, null);
+                }
+                var total = {};
+                for (let i = 0; i < results.length; i++) {
+                    if (i === 0) {
+                        total = results[0].judgement;
+                    } else {
+                        for (let key in total) {
+                            if (Object.hasOwnProperty.call(total, key))
+                                total[key] += results[i][key];
+                        }
+                    }
+                }
+                for (let key in total) {
+                    if (Object.hasOwnProperty.call(total, key))
+                        total[key] /= results.length;
+                }
+                next(null, total);
             });
         }
     });
