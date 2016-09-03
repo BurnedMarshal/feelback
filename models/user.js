@@ -113,15 +113,14 @@ function judge(referee, judged, value, next) {
  * @param  {Function} next        [description]
  */
 function judgements(startUserId, endUserId, next) {
-    var directCypher = `START a=node(${startUserId}), b=node(${endUserId}) ` +
-    "MATCH p=(a)-[r:judge]->(b) " +
+    var directCypher = `MATCH p=(a:User {uuid:'${startUserId}'})-[r:judge]->(b:User {uuid:'${endUserId}'}) ` +
     "RETURN r";
     db.query(directCypher, {}, function(err, results) {
         if (err) {
             return next(err, null);
         }
-        if (results && results.r) {
-            next(null, results.r);
+        if (results && results.length > 0) {
+            next(null, results);
         } else {
             var cypher = `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(b) " +
@@ -139,7 +138,7 @@ function judgements(startUserId, endUserId, next) {
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(x3)-[r4:judge]->(b) " +
-            "WHERE NOT((a)-[:judge]->(b)) AND NOT(x1.id = x3.id) AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3" +
+            "WHERE NOT((a)-[:judge]->(b)) AND NOT(x1.id = x3.id) AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement ";
