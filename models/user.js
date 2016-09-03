@@ -108,8 +108,8 @@ function judge(referee, judged, value, next) {
 
 /**
  * Return judgements from one user to another
- * @param  {[type]}   startUserId [description]
- * @param  {[type]}   endUserId   [description]
+ * @param  {string}   startUserId [description]
+ * @param  {string}   endUserId   [description]
  * @param  {Function} next        [description]
  */
 function judgements(startUserId, endUserId, next) {
