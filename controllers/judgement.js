@@ -7,9 +7,9 @@ var User = require('../models/user');
  * @param  {Function} next [description]
  */
 function judgeScore(req, res, next) {
-    User.judgements(req.user, req.userId, function(err, judgement) {
+    User.judgements(req.user, req.params.userId, function(err, judgement) {
         if (err) {
-            return res.status(500).send({message: 'Internal Server Error'});
+            return res.status(500).send({message: 'Internal Server Error', error: err});
         }
         req.judgement = judgement;
         next();
