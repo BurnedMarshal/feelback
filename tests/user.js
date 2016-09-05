@@ -10,19 +10,20 @@ test('CREATE User', t => {
         newUser.id = user.id;
         createdResource = user;
         t.deepEquals(newUser, user, 'User object succefflully created');
-        t.end();
-    });
-});
-
-test('UPDATE User', t => {
-    var newUser = createdResource;
-    newUser.name = 'Jonny Doo';
-    User.save(newUser, function(err, user) {
-        t.error(err, 'no error updating user');
-        createdResource = user;
-        newUser.uuid = user.uuid;
-        t.deepEquals(newUser, user, 'User object succefflully updated');
-        t.end();
+        t.test('UPDATE User', t => {
+            var newUser = createdResource;
+            console.log("Load previusly created user: ", newUser);
+            newUser.name = 'Jonny Doo';
+            User.save(newUser, function(err, user) {
+                t.error(err, 'no error updating user');
+                if (!err) {
+                    createdResource = user;
+                    newUser.uuid = user.uuid;
+                    t.deepEquals(newUser, user, 'User object succefflully updated');
+                }
+                t.end();
+            });
+        });
     });
 });
 
