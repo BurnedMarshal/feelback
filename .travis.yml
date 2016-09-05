@@ -5,7 +5,7 @@ jdk:
   - oraclejdk8  # needed for local Neo4j 2.0+
 
 env:
-  - NEO4J_VERSION="3.0.3"
+  - NEO4J_VERSION="3.0.1"
 
 before_install:
   - sudo apt-get update && sudo apt-get install oracle-java8-installer
