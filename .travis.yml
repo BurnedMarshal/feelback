@@ -10,7 +10,7 @@ env:
 before_install:
   - sudo apt-get update && sudo apt-get install oracle-java8-installer
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-  - wget dist.neo4j.org/neo4j-community-$NEO_VERSION-unix.tar.gz
+  - wget dist.neo4j.org/neo4j-community-$NEO4J_VERSION-unix.tar.gz
   - tar -xzf neo4j-community-$NEO_VERSION-unix.tar.gz
   - echo "org.neo4j.server.transaction.timeout=1" >> neo4j-community-$NEO_VERSION/conf/neo4j-server.properties
   - neo4j-community-$NEO_VERSION/bin/neo4j start
