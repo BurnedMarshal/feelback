@@ -148,19 +148,28 @@ function judgements(startUserId, endUserId, next) {
                     return next(err, null);
                 }
                 var total = {};
+                var weight = {};
                 for (let i = 0; i < results.length; i++) {
                     if (i === 0) {
+                        for (let key in results[0].judgement) {
+                            if (Object.hasOwnProperty.call(results[0].judgement, key)) {
+                                total[key] = results[0].judgement[key] * (results[0].judgement[key] / 5);
+                                weight[key] = (results[0].judgement[key] / 5);
+                            }
+                        }
                         total = results[0].judgement;
                     } else {
                         for (let key in total) {
-                            if (Object.hasOwnProperty.call(total, key))
-                                total[key] += results[i].judgement[key];
+                            if (Object.hasOwnProperty.call(total, key)) {
+                                total[key] += results[i].judgement[key] * (results[i].judgement[key] / 5);
+                                weight[key] = (results[i].judgement[key] / 5);
+                            }
                         }
                     }
                 }
                 for (let key in total) {
                     if (Object.hasOwnProperty.call(total, key))
-                        total[key] /= results.length;
+                        total[key] /= weight[key];
                 }
                 next(null, total);
             });
