@@ -14,7 +14,7 @@ test('CREATE User', t => {
     });
 });
 
-test('UPDATE User', t => {
+/* test('UPDATE User', t => {
     var newUser = createdResource;
     newUser.name = 'Jonny Doo';
     User.save(newUser, function(err, user) {
@@ -24,7 +24,7 @@ test('UPDATE User', t => {
         t.deepEquals(newUser, user, 'User object succefflully updated');
         t.end();
     });
-});
+});*/
 
 test('FIND User', t => {
     var newUser = createdResource;
