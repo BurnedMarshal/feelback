@@ -48,7 +48,7 @@ function where(query, next) {
  * @param  {Function} next callback
  */
 function save(user, next) {
-    if (user.id) {
+    if (user.id !== undefined && user.id !== null) {
         db.save(user, function(err, user) {
             next(err, user);
         });
