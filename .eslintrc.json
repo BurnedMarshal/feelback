@@ -3,7 +3,8 @@
     "env":{
         "node": true,
         "browser": true,
-        "jquery": true
+        "jquery": true,
+        "mocha": true
     },
     "rules": {
         "indent": [2, 4],

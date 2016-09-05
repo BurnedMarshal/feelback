@@ -1,13 +1,14 @@
 const User = require('../models/user');
-var test = require('tape');
+var should = require('chai').should();
+var assert = require('chai').assert;
 const nodeNum = 10;
 
 var createdUsers = [];
 
-test('CREATE Users', t => {
+describe('CREATE Users', () => {
     'use strict';
     for (let i = 0; i < nodeNum; i++) {
-        t.test('CREATE User ' + i, t => {
+        it('CREATE User ' + i, done => {
             var code = Math.floor((Math.random() * 10) + 1);
             var newUser = {
                 first_name: "John " + code,
@@ -17,24 +18,24 @@ test('CREATE Users', t => {
                 email: "test" + code + "@test.it"
             };
             User.save(newUser, function(err, user) {
-                t.error(err, 'no error saving user');
+                should.not.exist(err, 'no error saving user');
                 newUser.id = user.id;
                 createdUsers.push(user);
-                t.deepEquals(newUser, user, 'User object succefflully created');
-                t.end();
+                assert.deepEqual(newUser, user, 'User object succefflully created');
+                done();
             });
         });
     }
 });
 
-test('RANDOM Evaluations', t => {
+describe('RANDOM Evaluations', () => {
     'use strict';
     for (let i = 0; i < nodeNum; i++) {
-        t.test("Evaluate " + i, t => {
+        it("Evaluate " + i, done => {
             var referee = Math.floor((Math.random() * createdUsers.length));
             var judjed = Math.floor((Math.random() * createdUsers.length));
             if (referee === judjed) {
-                t.end();
+                done();
             } else {
                 var vote = {
                     professional: Math.floor((Math.random() * 5) + 1),
@@ -43,28 +44,28 @@ test('RANDOM Evaluations', t => {
                 };
                 var expectedAverage = (vote.professional + vote.etical + vote.personal) / 3;
                 User.judge(createdUsers[referee], createdUsers[judjed], vote, function(err, relationship) {
-                    t.error(err, 'no error creating relationship');
+                    should.not.exist(err, 'no error creating relationship');
                     vote.average = expectedAverage;
-                    t.deepEquals(relationship, {
+                    assert.deepEqual(relationship, {
                         start: createdUsers[referee].id,
                         end: createdUsers[judjed].id,
                         type: 'judge',
                         properties: vote,
                         id: relationship.id
                     }, 'relationship data match');
-                    t.end();
+                    done();
                 });
             }
         });
     }
 });
 
-test('DELETE Users', t => {
+describe('DELETE Users', () => {
     createdUsers.forEach(item => {
-        t.test("DELETE user " + item.uuid, t => {
+        it("DELETE user " + item.uuid, done => {
             User.delete(item, function(err) {
-                t.error(err, 'no error deleting user node');
-                t.end();
+                should.not.exist(err, 'no error deleting user node');
+                done();
             });
         });
     });
