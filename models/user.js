@@ -162,7 +162,7 @@ function judgements(startUserId, endUserId, next) {
                         for (let key in total) {
                             if (Object.hasOwnProperty.call(total, key)) {
                                 total[key] += results[i].judgement[key] * (results[i].judgement[key] / 5);
-                                weight[key] = (results[i].judgement[key] / 5);
+                                weight[key] += (results[i].judgement[key] / 5);
                             }
                         }
                     }
