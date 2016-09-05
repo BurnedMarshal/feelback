@@ -8,7 +8,7 @@
     "start": "forever start --uid ${npm_package_name} --append bin/www",
     "restart": "forever restart --uid ${npm_package_name} bin/www",
     "stop": "forever stop --uid ${npm_package_name} bin/www",
-    "test": "node ./tests/user.js"
+    "test": "node ./tests/*.js"
   },
   "pre-commit": [
     "lint",
