@@ -16,3 +16,5 @@ before_install:
   - neo4j-community-$NEO4J_VERSION/bin/neo4j start
   - sleep 10
   - curl -u neo4j:neo4j -H accept:application/json -H content-type:application/json http://localhost:7474/user/neo4j/password -d '{"password":"neo"}'
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
