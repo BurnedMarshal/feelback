@@ -54,7 +54,18 @@ describe('RANDOM Evaluations', () => {
                         properties: vote,
                         id: relationship.id
                     }, 'relationship data match');
-                    createdJudgements.push(relationship);
+                    var found = false;
+                    for (let j = 0; j < createdJudgements.length; j++) {
+                        if (createdJudgements[j].start === relationship.start && createdJudgements[j].end === relationship.end) {
+                            found = true;
+                            createdJudgements[j] = relationship;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        createdJudgements.push(relationship);
+                    }
+
                     done();
                 });
             }
