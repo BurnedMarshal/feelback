@@ -4,6 +4,7 @@ var assert = require('chai').assert;
 const nodeNum = 10;
 
 var createdUsers = [];
+var createdJudgements = [];
 
 describe('CREATE Users', () => {
     'use strict';
@@ -53,12 +54,69 @@ describe('RANDOM Evaluations', () => {
                         properties: vote,
                         id: relationship.id
                     }, 'relationship data match');
+                    createdJudgements.push(relationship);
                     done();
                 });
             }
         });
+        describe('Check Judgement ' + i, final => {
+            'use strict';
+            it('Check getJudgement model method', done => {
+                if (createdJudgements[i]) {
+                    var referee = null;
+                    var judged = null;
+                    for (let k = 0; k < createdUsers.length; k++) {
+                        if (createdUsers[k].id === createdJudgements[i].start) {
+                            referee = createdUsers[k];
+                        } else if (createdUsers[k].id === createdJudgements[i].end) {
+                            judged = createdUsers[k];
+                        }
+                        if (referee && judged) {
+                            break;
+                        }
+                    }
+                    User.getJudgement(referee.uuid, judged.uuid, (err, judgement) => {
+                        should.not.exist(err, 'no error reading relationship');
+                        assert.deepEqual(judgement, createdJudgements[i].properties);
+                        done();
+                    });
+                } else {
+                    done();
+                }
+            });
+        });
     }
 });
+
+/* describe('Check Judgements', final => {
+    'use strict';
+    console.log(createdJudgements.length);
+    for (let i = 0; i < createdJudgements.length; i++) {
+        it('Check getJudgement model method', done => {
+            var referee = null;
+            var judged = null;
+            for (let k = 0; k < createdUsers.length; k++) {
+                if (createdUsers[k].id === createdJudgements[i].start) {
+                    referee = createdUsers[k];
+                } else if (createdUsers[k].id === createdJudgements[i].end) {
+                    judged = createdUsers[k];
+                }
+                if (referee && judged) {
+                    break;
+                }
+            }
+            User.getJudgement(referee.uuid, judged.uuid, (err, judgement) => {
+                should.not.exist(err, 'no error reading relationship');
+                assert.deepEqual(judgement, createdJudgements.properties);
+                assert.true(false);
+                done();
+                if (i === (createdJudgements.length - 1)) {
+                    final();
+                }
+            });
+        });
+    }
+});*/
 
 describe('DELETE Users', () => {
     createdUsers.forEach(item => {
