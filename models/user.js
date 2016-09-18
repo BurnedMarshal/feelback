@@ -12,7 +12,8 @@ module.exports = {
     delete: del,
     judge: judge,
     judgements: judgements,
-    getJudgement: getJudgement
+    getJudgement: getJudgement,
+    network: network
 };
 
 /**
@@ -184,5 +185,24 @@ function judgements(startUserId, endUserId, next) {
                 total[key] /= weight[key];
         }
         next(null, total);
+    });
+}
+
+/**
+ * Return all network for first level judge connection
+ * @param  {[type]}   userId User uuid
+ * @param  {Function} next   callback
+ */
+function network(userId, next) {
+    var cypher = `MATCH (n:User)-[r:judge]->(l) WHERE n.uuid = '${userId}' return l`;
+    db.query(cypher, {}, function(err, results) {
+        if (err) {
+            return next(err, null);
+        }
+        if (results && results.length > 0) {
+            next(null, results);
+        } else {
+            next(null, null);
+        }
     });
 }
