@@ -1,7 +1,7 @@
 /* global angular*/
 angular.module('feelback')
-  .controller('mainController', ['$scope', '$rootScope', '$routeParams', '$translate', '$location', '$auth', '$sessionStorage',
-    function($scope, $rootScope, $routeParams, $translate, $location, $auth, $sessionStorage) {
+  .controller('mainController', ['$scope', '$rootScope', '$routeParams', '$translate', '$location', '$auth', '$localStorage',
+    function($scope, $rootScope, $routeParams, $translate, $location, $auth, $localStorage) {
         $rootScope.fromTeam = false;
         console.log('Main controller loaded!');
         if ($location && $location.path() && $location.path().split('/').length > 1) {
@@ -33,11 +33,11 @@ angular.module('feelback')
             console.log('logout process');
             $auth.logout().then(function() {
                 $location.path('/' + $scope.lang + '/login');
-                $sessionStorage.currentUser = null;
+                $localStorage.currentUser = null;
             });
         };
     }])
-  .controller('homeController', ['$scope', '$auth', 'Account', '$sessionStorage', '$location', function($scope, $auth, Account, $sessionStorage, $location) {
+  .controller('homeController', ['$scope', '$auth', 'Account', '$localStorage', '$location', function($scope, $auth, Account, $localStorage, $location) {
       console.log('homeController');
       $('body').removeClass('cyan');
       $('body').removeClass('loaded');
@@ -55,8 +55,8 @@ angular.module('feelback')
       $scope.getProfile = function() {
           Account.getProfile()
             .then(function(response) {
-                $sessionStorage.currentUser = response.data;
-                $location.path('/' + $scope.lang + '/users/' + $sessionStorage.currentUser.uuid + '/me');
+                $localStorage.currentUser = response.data;
+                $location.path('/' + $scope.lang + '/users/' + $localStorage.currentUser.uuid + '/me');
                 // console.log($scope.user);
             })
             .catch(function(response) {
@@ -117,6 +117,21 @@ angular.module('feelback')
           $scope.user = data;
           console.log($scope.user);
       });
+
+      $scope.userLocation = function() {
+          try {
+              return JSON.parse($scope.user.location).name;
+          } catch (e) {
+              return '';
+          }
+      };
+      $scope.userWork = function() {
+          try {
+              return JSON.parse($scope.user.work)[0].position.name;
+          } catch (e) {
+              return '';
+          }
+      };
   }])
   .controller('profileController', ['$scope', '$auth', '$location', '$routeParams', 'User', function($scope, $auth, $location, $routeParams, User) {
       console.log('userController');
