@@ -97,6 +97,19 @@ describe('RANDOM Evaluations', () => {
             });
         });
     }
+    after('DELETE Users', function() {
+        describe('DELETE Users', () => {
+            'use strict';
+            for (let i = 0; i < createdUsers.length; i++) {
+                it("DELETE user " + createdUsers[i].uuid, done => {
+                    User.delete(createdUsers[i], function(err) {
+                        should.not.exist(err, 'no error deleting user node');
+                        done();
+                    });
+                });
+            }
+        });
+    });
 });
 
 /* describe('Check Judgements', final => {
@@ -128,14 +141,3 @@ describe('RANDOM Evaluations', () => {
         });
     }
 });*/
-
-describe('DELETE Users', () => {
-    createdUsers.forEach(item => {
-        it("DELETE user " + item.uuid, done => {
-            User.delete(item, function(err) {
-                should.not.exist(err, 'no error deleting user node');
-                done();
-            });
-        });
-    });
-});
