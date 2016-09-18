@@ -133,23 +133,27 @@ angular.module('feelback')
           }
       };
   }])
-  .controller('profileController', ['$scope', '$auth', '$location', '$routeParams', 'User', function($scope, $auth, $location, $routeParams, User) {
-      console.log('userController');
-      $('body').removeClass('loaded');
-      $('body').removeClass('cyan');
-      setTimeout(function() {
-          $('#slide-out').perfectScrollbar();
-          $('.dropdown-button').dropdown({
-              inDuration: 300,
-              outDuration: 225,
-              constrain_width: false, // Does not change width of dropdown to that of the activator
-              hover: true, // Activate on hover
-              gutter: 0, // Spacing from edge
-              belowOrigin: true, // Displays dropdown below the button
-              alignment: 'left' // Displays dropdown with edge aligned to the left of button
-          });
-      }, 10);
-      $scope.user = User.get($routeParams.id)
+  .controller('profileController', ['$scope', '$auth', '$location', '$routeParams', 'User', '$localStorage',
+    function($scope, $auth, $location, $routeParams, User, $localStorage) {
+        console.log('userController');
+        if (!$auth.isAuthenticated() && $localStorage.currentUser.uuid !== $routeParams.id) {
+            $location.path('/' + $scope.lang + '/users/' + $routeParams.id);
+        }
+        $('body').removeClass('loaded');
+        $('body').removeClass('cyan');
+        setTimeout(function() {
+            $('#slide-out').perfectScrollbar();
+            $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrain_width: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            });
+        }, 10);
+        $scope.user = User.get($routeParams.id)
       .error(function(data, status) {
           if (status === 404) {
               window.location = window.location.origin + '/not-found';
@@ -160,18 +164,18 @@ angular.module('feelback')
           $scope.user = data;
           console.log($scope.user);
       });
-      $scope.userLocation = function() {
-          try {
-              return JSON.parse($scope.user.location).name;
-          } catch (e) {
-              return '';
-          }
-      };
-      $scope.userWork = function() {
-          try {
-              return JSON.parse($scope.user.work)[0].position.name;
-          } catch (e) {
-              return '';
-          }
-      };
-  }]);
+        $scope.userLocation = function() {
+            try {
+                return JSON.parse($scope.user.location).name;
+            } catch (e) {
+                return '';
+            }
+        };
+        $scope.userWork = function() {
+            try {
+                return JSON.parse($scope.user.work)[0].position.name;
+            } catch (e) {
+                return '';
+            }
+        };
+    }]);
