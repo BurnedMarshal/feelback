@@ -24,6 +24,10 @@ angular.module('feelback')
                 templateUrl: '/users',
                 controller: 'userController'
             })
+            .when('/:lang/users/:id/me', {
+                templateUrl: '/users/profile',
+                controller: 'profileController'
+            })
             .otherwise({
                 redirectTo: lang + '/'
             });

@@ -18,7 +18,7 @@ router.get('/login', function(req, res, next) {
 });
 
 /* GET index page angular. */
-router.get('/:lang?/:route?/:id?', function(req, res, next) {
+router.get('/:lang?/:route?/:id?/:action?', function(req, res, next) {
     res.render('index', {});
 });
 
