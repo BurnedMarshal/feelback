@@ -145,4 +145,18 @@ angular.module('feelback')
           $scope.user = data;
           console.log($scope.user);
       });
+      $scope.userLocation = function() {
+          try {
+              return JSON.parse($scope.user.location).name;
+          } catch (e) {
+              return '';
+          }
+      };
+      $scope.userWork = function() {
+          try {
+              return JSON.parse($scope.user.work)[0].position.name;
+          } catch (e) {
+              return '';
+          }
+      };
   }]);
