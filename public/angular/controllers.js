@@ -153,17 +153,19 @@ angular.module('feelback')
                 alignment: 'left' // Displays dropdown with edge aligned to the left of button
             });
         }, 10);
-        $scope.user = User.get($routeParams.id)
-      .error(function(data, status) {
-          if (status === 404) {
-              window.location = window.location.origin + '/not-found';
-          } else {
-              window.location = window.location.origin + '/error';
-          }
-      }).success(function(data) {
-          $scope.user = data;
-          console.log($scope.user);
-      });
+        $scope.user = $localStorage.currentUser;
+        User.network()
+          .error(function(data, status) {
+              console.error(data);
+              if (status === 404) {
+                  window.location = window.location.origin + '/not-found';
+              } else {
+                  window.location = window.location.origin + '/error';
+              }
+          }).success(function(data) {
+              $scope.network = data;
+              console.log($scope.network);
+          });
         $scope.userLocation = function() {
             try {
                 return JSON.parse($scope.user.location).name;

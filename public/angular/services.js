@@ -11,6 +11,9 @@ angular.module('feelback')
       return {
           get: function(id) {
               return $http.get('/api/v1/users/' + id);
+          },
+          network: function() {
+              return $http.get('/api/v1/users/network');
           }
       };
   }]);

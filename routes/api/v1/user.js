@@ -12,6 +12,15 @@ router.get('/me', auth.ensureAuthenticated, function(req, res) {
     });
 });
 
+router.get('/network', auth.ensureAuthenticated, function(req, res) {
+    User.network(req.user, function(err, network) {
+        if (err) {
+            return res.status(500).send({message: 'Internal server error', error: err});
+        }
+        res.send(network);
+    });
+});
+
 router.get('/:id', function(req, res) {
     console.log(req.params.id);
     User.findById(req.params.id, function(err, user) {
