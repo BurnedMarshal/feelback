@@ -21,6 +21,12 @@ angular.module('feelback')
       return {
           get: function(id) {
               return $http.get('/api/v1/judgement/users/' + id);
+          },
+          set: function(id, judgement) {
+              return $http.post('/api/v1/judgement/users/' + id, {judgement: judgement});
+          },
+          direct: function(id) {
+              return $http.get('/api/v1/judgement/' + id);
           }
       };
   }]);

@@ -8,6 +8,14 @@ router.get('/users/:userId', auth.ensureAuthenticated, judgement.judgeScore, fun
     res.status(200).json({judgement: req.judgement});
 });
 
+router.post('/users/:userId', auth.ensureAuthenticated, judgement.judge, function(req, res) {
+    res.status(200).json({judgement: req.judgement});
+});
+
+router.get('/:userId', auth.ensureAuthenticated, judgement.directJudgement, function(req, res) {
+    res.status(200).json({judgement: req.judgement});
+});
+
 router.get('/:referee/:judged', util.bypassLogin, judgement.judgeScore, function(req, res) {
     res.status(200).json({judgement: req.judgement});
 });

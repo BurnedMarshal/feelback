@@ -122,6 +122,15 @@ angular.module('feelback')
               $scope.judgement = data.judgement;
               console.log("Judgement: ", $scope.judgement);
           });
+          Judgement.direct($routeParams.id)
+          .error(function(data, status) {
+              $scope.myJudgement = {};
+              console.error(data);
+          }).success(function(data) {
+              $scope.directJudgement = data.judgement;
+              $scope.myJudgement = angular.copy($scope.directJudgement);
+              console.log("MY Judgement: ", $scope.myJudgement);
+          });
       });
 
       $scope.userLocation = function() {
@@ -140,7 +149,19 @@ angular.module('feelback')
       };
 
       $scope.vote = function(type) {
+          $scope.newType = type;
           $('#modalVote').openModal();
+      };
+
+      $scope.judge = function() {
+          Judgement.set($routeParams.id, $scope.myJudgement)
+          .error(function(data, status) {
+              console.error(data);
+          }).success(function(data) {
+              $scope.directJudgement = data.judgement;
+              $('#modalVote').closeModal();
+              console.log("New directJudgement: ", $scope.directJudgement);
+          });
       };
   }])
   .controller('profileController', ['$scope', '$auth', '$location', '$routeParams', 'User', '$localStorage',

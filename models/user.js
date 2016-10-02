@@ -85,9 +85,11 @@ function judge(referee, judged, value, next) {
     var cypher = `START referee = node(${referee.id}), judged = node(${judged.id}) ` +
          "CREATE UNIQUE (referee)-[r:judge]->(judged) " +
          "RETURN r ";
+    console.log(value);
     db.query(cypher, function(err, relationship) {
         'use strict';
         if (err) {
+            console.error(err);
             next(err, relationship);
         } else {
             var average = 0;

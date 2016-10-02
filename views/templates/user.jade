@@ -30,13 +30,75 @@ section#content
               a.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("sconosciuto")') sconosciuto
             #modalVote.modal
                 .modal-content
-                  p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    |Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                  input#test1(name="group1", type="radio")
-                  label(for="test1") Red
+                  .row.center
+                    h3 dai una valutazione a questo tuo "{{newType}}"
+                    p se non conosci questa persona ti consigliamo di non valutarla. Ogni tua valutazione influenzerà la tua personale visione degli altri utenti della piattaforma.
+                  .row
+                    .col.s12.m12.l12
+                        table
+                          thead
+                            tr
+                              th(data-field='id') 
+                              th(data-field='1') 1
+                              th(data-field='2') 2
+                              th(data-field='3') 3
+                              th(data-field='4') 4
+                              th(data-field='5') 5
+                          tbody
+                            tr
+                              td Sfera personale
+                              td 
+                                input#personal1(name="personal", type="radio", ng-model='myJudgement.personal', value='1')
+                                label(for="personal1")
+                              td 
+                                input#personal2(name="personal", type="radio", ng-model='myJudgement.personal', value='2')
+                                label(for="personal2")
+                              td
+                                input#personal3(name="personal", type="radio", ng-model='myJudgement.personal', value='3')
+                                label(for="personal3")
+                              td 
+                                input#personal4(name="personal", type="radio", ng-model='myJudgement.personal', value='4')
+                                label(for="personal4")
+                              td 
+                                input#personal5(name="personal", type="radio", ng-model='myJudgement.personal', value='5')
+                                label(for="personal5")
+                            tr
+                              td Sfera etica
+                              td 
+                                input#etical1(name="etical", type="radio", ng-model='myJudgement.etical', value='1')
+                                label(for="etical1")
+                              td 
+                                input#etical2(name="etical", type="radio", ng-model='myJudgement.etical', value='2')
+                                label(for="etical2")
+                              td
+                                input#etical3(name="etical", type="radio", ng-model='myJudgement.etical', value='3')
+                                label(for="etical3")
+                              td 
+                                input#etical4(name="etical", type="radio", ng-model='myJudgement.etical', value='4')
+                                label(for="etical4")
+                              td 
+                                input#etical5(name="etical", type="radio", ng-model='myJudgement.etical', value='5')
+                                label(for="etical5")
+                            tr
+                              td Sfera professionale
+                              td 
+                                input#professional1(name="professional", type="radio", ng-model='myJudgement.professional', value='1')
+                                label(for="professional1")
+                              td 
+                                input#professional2(name="professional", type="radio", ng-model='myJudgement.professional', value='2')
+                                label(for="professional2")
+                              td
+                                input#professional3(name="professional", type="radio", ng-model='myJudgement.professional', value='3')
+                                label(for="professional3")
+                              td 
+                                input#professional4(name="professional", type="radio", ng-model='myJudgement.professional', value='4')
+                                label(for="professional4")
+                              td 
+                                input#professional5(name="professional", type="radio", ng-model='myJudgement.professional', value='5')
+                                label(for="professional5")    
                 .modal-footer.teal.lighten-4
-                  a.waves-effect.waves-red.btn-flat.modal-action.modal-close(href="#") Annulla
-                  a.waves-effect.waves-green.btn-flat.modal-action.modal-close(href="#") Vota
+                  .waves-effect.waves-red.btn-flat.modal-action.modal-close(href="#") Annulla
+                  .waves-effect.waves-green.btn-flat(ng-click='judge()') Vota
           #card-stats
             .row
               .col.s4
@@ -45,21 +107,24 @@ section#content
                     p.card-stats-title
                       i personale
                     h1(ng-bind-html='judgement.personal', ng-if='judgement.personal') 
-                    h1(ng-if='!judgement.personal') ?
+                    h1(ng-if='!judgement.personal && !directJudgement.personal') ?
+                    h1(ng-if='!judgement.personal && directJudgement.personal', ng-bind-html='directJudgement.personal')
               .col.s4
                 .card
                   .card-content.indigo.darken-3.white-text
                     p.card-stats-title
                       i etico
                     h1(ng-bind-html='judgement.etical', ng-if='judgement.etical') 
-                    h1(ng-if='!judgement.etical') ?
+                    h1(ng-if='!judgement.etical && !directJudgement.etical') ?
+                    h1(ng-if='!judgement.etical && directJudgement.etical', ng-bind-html='directJudgement.etical')
               .col.s4
                 .card
                   .card-content.deep-purple.darken-3.white-text
                     p.card-stats-title
                       i professionale
                     h1(ng-bind-html='judgement.professional', ng-if='judgement.professional') 
-                    h1(ng-if='!judgement.professional') ?
+                    h1(ng-if='!judgement.professional && !directJudgement.professional') ?
+                    h1(ng-if='!judgement.professional && directJudgement.professional', ng-bind-html='directJudgement.professional')
           .row
             a.waves-effect.waves-light.btn.col.s4.offset-s1 Button
             a.waves-effect.waves-light.btn.col.s4.offset-s2 Button
