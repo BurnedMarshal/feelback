@@ -10,14 +10,8 @@ header#header.page-topbar
             li.search-out(style='display: none;')
               input.search-out-text(type='text')
             li
-              a.waves-effect.waves-block.waves-light.show-search(href='javascript:void(0);')
+              .waves-effect.waves-block.waves-light.show-search(ng-click='searchModal()')
                 i.mdi-action-search
-            li
-              a(href='components.html')
-                i.mdi-action-view-module
-            li
-              a(href='javascript.html')
-                i.mdi-navigation-refresh
             li
               a.dropdown-button(href='#!', data-activates='login-dropdown')
                 i.mdi-navigation-more-vert

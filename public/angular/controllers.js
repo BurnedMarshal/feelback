@@ -36,6 +36,14 @@ angular.module('feelback')
                 $localStorage.currentUser = null;
             });
         };
+
+        $('#modalSearch').css('height', $(window).height())
+        .css('max-height', $(window).height())
+        .css('width', '100%');
+
+        $scope.searchModal = function() {
+            $('#modalSearch').openModal();
+        };
     }])
   .controller('homeController', ['$scope', '$auth', 'Account', '$localStorage', '$location', function($scope, $auth, Account, $localStorage, $location) {
       console.log('homeController');
