@@ -13,7 +13,8 @@ module.exports = {
     judge: judge,
     judgements: judgements,
     getJudgement: getJudgement,
-    network: network
+    network: network,
+    search: search
 };
 
 /**
@@ -198,6 +199,25 @@ function judgements(startUserId, endUserId, next) {
 function network(userId, next) {
     var cypher = `MATCH (n:User)-[r:judge]->(l) WHERE n.uuid = '${userId}' return l`;
     db.query(cypher, {}, function(err, results) {
+        if (err) {
+            return next(err, null);
+        }
+        if (results && results.length > 0) {
+            next(null, results);
+        } else {
+            next(null, null);
+        }
+    });
+}
+
+/**
+ * Search all user by name using regular expression
+ * @param  {[type]}   name [description]
+ * @param  {Function} next [description]
+ */
+function search(name, next) {
+    var searchCypher = `MATCH (n:User) WHERE n.name =~ "(?i).*${name}.*" RETURN n`;
+    db.query(searchCypher, {}, function(err, results) {
         if (err) {
             return next(err, null);
         }

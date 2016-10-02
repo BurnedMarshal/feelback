@@ -21,6 +21,25 @@ router.get('/network', auth.ensureAuthenticated, function(req, res) {
     });
 });
 
+router.get('/search', function(req, res) {
+    if (req.query.name) {
+        User.search(req.query.name, function(err, users) {
+            'use strict';
+            if (err) return res.status(500).send({message: 'Internal server error'});
+            var usersFound = [];
+            for (let i = 0; i < users.length; i++) {
+                let user = {
+                    name: users[i].name,
+                    uuid: users[i].uuid,
+                    picture: users[i].picture
+                };
+                usersFound.push(user);
+            }
+            res.status(200).send(usersFound);
+        });
+    }
+});
+
 router.get('/:id', function(req, res) {
     console.log(req.params.id);
     User.findById(req.params.id, function(err, user) {
