@@ -16,4 +16,11 @@ angular.module('feelback')
               return $http.get('/api/v1/users/network');
           }
       };
+  }])
+  .factory('Judgement', ['$http', function($http) {
+      return {
+          get: function(id) {
+              return $http.get('/api/v1/judgement/users/' + id);
+          }
+      };
   }]);

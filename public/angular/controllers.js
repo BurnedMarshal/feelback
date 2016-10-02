@@ -72,7 +72,6 @@ angular.module('feelback')
       }
   }])
   .controller('loginController', ['$scope', '$auth', '$location', 'Account', function($scope, $auth, $location, Account) {
-      // $('body').removeClass('loaded');
       console.log('loginController');
       $('body').addClass('cyan');
       if ($auth.isAuthenticated()) {
@@ -90,7 +89,7 @@ angular.module('feelback')
             });
       };
   }])
-  .controller('userController', ['$scope', '$auth', '$location', '$routeParams', 'User', function($scope, $auth, $location, $routeParams, User) {
+  .controller('userController', ['$scope', '$auth', '$location', '$routeParams', 'User', 'Judgement', function($scope, $auth, $location, $routeParams, User, Judgement) {
       console.log('userController');
       $('body').removeClass('loaded');
       $('body').removeClass('cyan');
@@ -106,7 +105,7 @@ angular.module('feelback')
               alignment: 'left' // Displays dropdown with edge aligned to the left of button
           });
       }, 10);
-      $scope.user = User.get($routeParams.id)
+      User.get($routeParams.id)
       .error(function(data, status) {
           if (status === 404) {
               window.location = window.location.origin + '/not-found';
@@ -115,7 +114,14 @@ angular.module('feelback')
           }
       }).success(function(data) {
           $scope.user = data;
-          console.log($scope.user);
+          Judgement.get($routeParams.id)
+          .error(function(data, status) {
+              $scope.judgement = {};
+              console.error(data);
+          }).success(function(data) {
+              $scope.judgement = data.judgement;
+              console.log("Judgement: ", $scope.judgement);
+          });
       });
 
       $scope.userLocation = function() {
@@ -131,6 +137,10 @@ angular.module('feelback')
           } catch (e) {
               return '';
           }
+      };
+
+      $scope.vote = function(type) {
+          $('#modalVote').openModal();
       };
   }])
   .controller('profileController', ['$scope', '$auth', '$location', '$routeParams', 'User', '$localStorage',
