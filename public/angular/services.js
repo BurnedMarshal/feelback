@@ -14,6 +14,9 @@ angular.module('feelback')
           },
           network: function() {
               return $http.get('/api/v1/users/network');
+          },
+          search: function(query) {
+              return $http.get('/api/v1/users/search?name=' + query);
           }
       };
   }])

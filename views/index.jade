@@ -5,7 +5,37 @@ block content
   div(ng-view='')
   #modalSearch.modal.bottom-sheet
       .modal-content
-        p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        |Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      .modal-footer.teal.lighten-4
+        .row
+          .input-field.col.s12
+            input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
+            label(for='name') Nome
+        .row
+          ul.collection.col.s4(ng-if='usersFound')
+            li.collection-item.avatar(ng-repeat='user in usersFound')
+              div(ng-if='usersFound.indexOf(user) < 7', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+                img.circle(ng-src='{{user.picture}}')
+                span.title(ng-bind-html='user.name')
+                //p
+                  | First Line
+                  br
+                  |  Second Line
+          ul.collection.col.s4(ng-if='usersFound && usersFound.length > 6')
+            li.collection-item.avatar(ng-repeat='user in usersFound')
+              a(ng-if='usersFound.indexOf(user) < 13 && usersFound.indexOf(user) > 6', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+                img.circle(ng-src='{{user.picture}}')
+                span.title(ng-bind-html='user.name')
+                //p
+                  | First Line
+                  br
+                  |  Second Line
+          ul.collection.col.s4(ng-if='usersFound && usersFound.length > 12')
+            li.collection-item.avatar(ng-repeat='user in usersFound')
+              a(ng-if='usersFound.indexOf(user) < 19 && usersFound.indexOf(user) > 12', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+                img.circle(ng-src='{{user.picture}}')
+                span.title(ng-bind-html='user.name')
+                //p
+                  | First Line
+                  br
+                  |  Second Line
+      .modal-footer.teal.lighten-4(style='bottom:0px;position:absolute;')
         .waves-effect.waves-red.btn-flat.modal-action.modal-close(href="#") Annulla

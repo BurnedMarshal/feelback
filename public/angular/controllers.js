@@ -1,7 +1,7 @@
 /* global angular*/
 angular.module('feelback')
-  .controller('mainController', ['$scope', '$rootScope', '$routeParams', '$translate', '$location', '$auth', '$localStorage',
-    function($scope, $rootScope, $routeParams, $translate, $location, $auth, $localStorage) {
+  .controller('mainController', ['$scope', '$rootScope', '$routeParams', '$translate', '$location', '$auth', '$localStorage', 'User',
+    function($scope, $rootScope, $routeParams, $translate, $location, $auth, $localStorage, User) {
         $rootScope.fromTeam = false;
         console.log('Main controller loaded!');
         if ($location && $location.path() && $location.path().split('/').length > 1) {
@@ -43,6 +43,26 @@ angular.module('feelback')
 
         $scope.searchModal = function() {
             $('#modalSearch').openModal();
+        };
+
+        $scope.searchQuery = function() {
+            if ($scope.searchString) {
+                User.search($scope.searchString)
+                .success(function(data) {
+                    $scope.usersFound = data;
+                    console.log(data);
+                })
+                .error(function(err, data) {
+                    if (err) console.log(err);
+                });
+            } else {
+                $scope.usersFound = null;
+            }
+        };
+
+        $scope.goTo = function(path) {
+            $('#modalSearch').closeModal();
+            $location.path(path);
         };
     }])
   .controller('homeController', ['$scope', '$auth', 'Account', '$localStorage', '$location', function($scope, $auth, Account, $localStorage, $location) {
