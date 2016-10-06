@@ -28,6 +28,9 @@ angular.module('feelback')
           set: function(id, judgement) {
               return $http.post('/api/v1/judgement/users/' + id, {judgement: judgement});
           },
+          delete: function(id) {
+              return $http.delete('/api/v1/judgement/users/' + id);
+          },
           direct: function(id) {
               return $http.get('/api/v1/judgement/' + id);
           }

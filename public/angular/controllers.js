@@ -181,12 +181,38 @@ angular.module('feelback')
           $('#modalVote').openModal();
       };
 
+      $scope.voteUnknown = function() {
+          $scope.newType = 'sconosciuto';
+          Judgement.delete($routeParams.id)
+            .error(function(data, status) {
+                console.error(data);
+            })
+            .success(function(data, status) {
+                $scope.myJudgement = {};
+                $scope.directJudgement = {};
+                $('.vote-button').removeClass('yellow');
+                $('.vote-button').addClass('blue');
+                $('#unknown').removeClass('blue').addClass('yellow');
+            });
+      };
+
       $scope.judge = function() {
           Judgement.set($routeParams.id, $scope.myJudgement)
           .error(function(data, status) {
               console.error(data);
           }).success(function(data) {
               $scope.directJudgement = data.judgement;
+              $('.vote-button').removeClass('yellow');
+              $('.vote-button').addClass('blue');
+              if ($scope.newType === 'amico') {
+                  $('#friend').removeClass('blue').addClass('yellow');
+              } else if ($scope.newType === 'parente') {
+                  $('#family').removeClass('blue').addClass('yellow');
+              } else if ($scope.newType === 'conoscente') {
+                  $('#known').removeClass('blue').addClass('yellow');
+              } else if ($scope.newType === 'collega') {
+                  $('#work').removeClass('blue').addClass('yellow');
+              }
               $('#modalVote').closeModal();
               console.log("New directJudgement: ", $scope.directJudgement);
           });

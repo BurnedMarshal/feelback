@@ -19,15 +19,15 @@ section#content
               h1.text-center Che tipo di relazione hai con questa persona?
           .row
             .col.s2.offset-s1
-              a.waves-effect.waves-light.btn.blue.darken-2.modal-trigger(ng-click='vote("amico")') amico
+              a#friend.vote-button.waves-effect.waves-light.btn.blue.darken-2.modal-trigger(ng-click='vote("amico")') amico
             .col.s2
-              a.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("parente")') parente
+              a#family.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("parente")') parente
             .col.s2
-              a.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")') collega
+              a#work.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")') collega
             .col.s2
-              a.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("conoscente")') conoscente
+              a#known.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("conoscente")') conoscente
             .col.s2
-              a.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("sconosciuto")') sconosciuto
+              a#unknown.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='voteUnknown()') sconosciuto
             #modalVote.modal
                 .modal-content
                   .row.center
@@ -106,25 +106,25 @@ section#content
                   .card-content.blue.darken-3.white-text
                     p.card-stats-title
                       i personale
-                    h1(ng-bind-html='judgement.personal', ng-if='judgement.personal') 
-                    h1(ng-if='!judgement.personal && !directJudgement.personal') ?
-                    h1(ng-if='!judgement.personal && directJudgement.personal', ng-bind-html='directJudgement.personal')
+                    h1(ng-bind-html='judgement.personal', ng-if='directJudgement.personal && judgement.personal') 
+                    h1(ng-if='!directJudgement.personal') ?
+                    h1(ng-if='!judgement.personal && directJudgement.personal') X
               .col.s4
                 .card
                   .card-content.indigo.darken-3.white-text
                     p.card-stats-title
                       i etico
-                    h1(ng-bind-html='judgement.etical', ng-if='judgement.etical') 
-                    h1(ng-if='!judgement.etical && !directJudgement.etical') ?
-                    h1(ng-if='!judgement.etical && directJudgement.etical', ng-bind-html='directJudgement.etical')
+                    h1(ng-bind-html='judgement.etical', ng-if='directJudgement.etical && judgement.etical') 
+                    h1(ng-if='!directJudgement.etical') ?
+                    h1(ng-if='!judgement.etical && directJudgement.etical') X
               .col.s4
                 .card
                   .card-content.deep-purple.darken-3.white-text
                     p.card-stats-title
                       i professionale
-                    h1(ng-bind-html='judgement.professional', ng-if='judgement.professional') 
-                    h1(ng-if='!judgement.professional && !directJudgement.professional') ?
-                    h1(ng-if='!judgement.professional && directJudgement.professional', ng-bind-html='directJudgement.professional')
+                    h1(ng-bind-html='judgement.professional', ng-if='directJudgement.professional && judgement.professional') 
+                    h1(ng-if='!directJudgement.professional') ?
+                    h1(ng-if='!judgement.professional && directJudgement.professional') X
           .row
             a.waves-effect.waves-light.btn.col.s4.offset-s1 Button
             a.waves-effect.waves-light.btn.col.s4.offset-s2 Button

@@ -14,7 +14,8 @@ module.exports = {
     judgements: judgements,
     getJudgement: getJudgement,
     network: network,
-    search: search
+    search: search,
+    deleteJudgement: deleteJudgement
 };
 
 /**
@@ -223,6 +224,27 @@ function search(name, next) {
         }
         if (results && results.length > 0) {
             next(null, results);
+        } else {
+            next(null, null);
+        }
+    });
+}
+
+/**
+ * Delete direct judgement from a referee to a judged user
+ * @param  {[type]}   refereeId [description]
+ * @param  {[type]}   judgedId  [description]
+ * @param  {Function} next      [description]
+ */
+function deleteJudgement(refereeId, judgedId, next) {
+    var directCypher = `MATCH p=(a:User {uuid:'${refereeId}'})-[r:judge]->(b:User {uuid:'${judgedId}'}) ` +
+    "DELETE r";
+    db.query(directCypher, {}, function(err, results) {
+        if (err) {
+            return next(err, null);
+        }
+        if (results && results.length > 0) {
+            next(null, results[0]);
         } else {
             next(null, null);
         }

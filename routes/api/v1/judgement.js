@@ -12,6 +12,10 @@ router.post('/users/:userId', auth.ensureAuthenticated, judgement.judge, functio
     res.status(200).json({judgement: req.judgement});
 });
 
+router.delete('/users/:userId', auth.ensureAuthenticated, judgement.deleteJudgement, function(req, res) {
+    res.status(200).json({message: 'ok'});
+});
+
 router.get('/:userId', auth.ensureAuthenticated, judgement.directJudgement, function(req, res) {
     res.status(200).json({judgement: req.judgement});
 });

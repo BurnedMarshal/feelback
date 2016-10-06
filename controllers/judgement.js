@@ -50,6 +50,20 @@ function directJudgement(req, res, next) {
     });
 }
 
+/**
+ * [deleteJudgement description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ */
+function deleteJudgement(req, res, next) {
+    User.deleteJudgement(req.user, req.params.userId, function(err) {
+        if (err) return res.status(500).send({message: 'Internal Server Error', error: err});
+        next();
+    });
+}
+
 module.exports.judgeScore = judgeScore;
 module.exports.judge = judge;
 module.exports.directJudgement = directJudgement;
+module.exports.deleteJudgement = deleteJudgement;
