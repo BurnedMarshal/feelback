@@ -197,6 +197,7 @@ angular.module('feelback')
       };
 
       $scope.judge = function() {
+          $scope.myJudgement.type = $scope.newType;
           Judgement.set($routeParams.id, $scope.myJudgement)
           .error(function(data, status) {
               console.error(data);
