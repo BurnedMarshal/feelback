@@ -220,9 +220,10 @@ function network(userId, next) {
  * @param  {Function} next [description]
  */
 function search(name, next) {
-    var searchCypher = `MATCH (n:User) WHERE n.name =~ "(?i).*${name}.*" RETURN n`;
+    var searchCypher = `MATCH (n:User) WHERE n.name =~ "(?i).*${name}.*" AND NOT(EXISTS(n.isTemp)) RETURN n`;
     db.query(searchCypher, {}, function(err, results) {
         if (err) {
+            console.log(err);
             return next(err, null);
         }
         if (results && results.length > 0) {
