@@ -150,21 +150,21 @@ function getJudgement(refereeId, judgedId, next) {
 function judgements(startUserId, endUserId, next) {
     var cypher = `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(b) " +
-            "WHERE r1.average >= 3 " +
+            "WHERE NOT(a.id = b.id) AND r1.average >= 3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(b) " +
-            "WHERE r1.average >= 3 AND r2.average >=3 " +
+            "WHERE NOT(a.id = x2.id) AND NOT(b.id = x1.id) AND r1.average >= 3 AND r2.average >=3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(x3)-[r4:judge]->(b) " +
-            "WHERE NOT(x1.id = x3.id) AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3 " +
+            "WHERE NOT(x1.id = x3.id) AND NOT(a.id = x2.id) AND NOT(b.id = x2.id) AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement ";
