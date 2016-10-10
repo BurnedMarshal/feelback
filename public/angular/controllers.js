@@ -208,8 +208,9 @@ angular.module('feelback')
           }).success(function(data) {
               $scope.directJudgement = data.judgement;
               getJudgement();
-              $('.vote-button').removeClass('yellow');
-              $('.vote-button').addClass('blue');
+              if ($('#unknown').hasClass('yellow')) {
+                  $('#unknown').removeClass('yellow').addClass('blue');
+              }
               $('#modalVote').closeModal();
               console.log("New directJudgement: ", $scope.directJudgement);
           });
