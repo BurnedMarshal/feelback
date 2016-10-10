@@ -190,8 +190,6 @@ angular.module('feelback')
             .success(function(data, status) {
                 $scope.myJudgement = {};
                 $scope.directJudgement = {};
-                $('.vote-button').removeClass('yellow');
-                $('.vote-button').addClass('blue');
                 $('#unknown').removeClass('blue').addClass('yellow');
             });
       };
@@ -205,15 +203,6 @@ angular.module('feelback')
               $scope.directJudgement = data.judgement;
               $('.vote-button').removeClass('yellow');
               $('.vote-button').addClass('blue');
-              if ($scope.newType === 'amico') {
-                  $('#friend').removeClass('blue').addClass('yellow');
-              } else if ($scope.newType === 'parente') {
-                  $('#family').removeClass('blue').addClass('yellow');
-              } else if ($scope.newType === 'conoscente') {
-                  $('#known').removeClass('blue').addClass('yellow');
-              } else if ($scope.newType === 'collega') {
-                  $('#work').removeClass('blue').addClass('yellow');
-              }
               $('#modalVote').closeModal();
               console.log("New directJudgement: ", $scope.directJudgement);
           });

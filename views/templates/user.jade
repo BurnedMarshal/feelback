@@ -19,13 +19,13 @@ section#content
               h1.text-center Che tipo di relazione hai con questa persona?
           .row
             .col.s2.offset-s1
-              a#friend.vote-button.waves-effect.waves-light.btn.blue.darken-2.modal-trigger(ng-click='vote("amico")') amico
+              a#friend.vote-button.waves-effect.waves-light.btn.darken-2.modal-trigger(ng-click='vote("amico")', ng-class="directJudgement.type === 'amico' ? 'yellow' : 'blue'") amico
             .col.s2
-              a#family.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("parente")') parente
+              a#family.vote-button.waves-effect.waves-light.btn.darken-2(ng-click='vote("parente")', ng-class="directJudgement.type === 'parente' ? 'yellow' : 'blue'") parente
             .col.s2
-              a#work.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")') collega
+              a#work.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")', ng-class="directJudgement.type === 'collega' ? 'yellow' : 'blue'") collega
             .col.s2
-              a#known.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("conoscente")') conoscente
+              a#known.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("conoscente")', ng-class="directJudgement.type === 'conoscente' ? 'yellow' : 'blue'") conoscente
             .col.s2
               a#unknown.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='voteUnknown()') sconosciuto
             #modalVote.modal
