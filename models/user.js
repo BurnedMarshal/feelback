@@ -98,8 +98,14 @@ function judge(referee, judged, value, next) {
             var size = 0;
             for (let val in value) {
                 if (Object.hasOwnProperty.call(value, val) && val !== 'type' && value[val] !== null) { // Support type value in judgement; bugfix null value
-                    average += parseInt(value[val], 10);
-                    size++;
+                    try {
+                        value[val] = parseInt(value[val], 10); // Conversion from any to integer
+                        average += value[val];
+                        size++;
+                    } catch (e) {
+                        console.log('Error in parsing vote: ', e);
+                        value[val] = null; // Skipping
+                    }
                 } else if (value[val] === null) {
                     delete value[val];
                 }
