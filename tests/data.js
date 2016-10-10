@@ -3,6 +3,8 @@ var should = require('chai').should();
 var assert = require('chai').assert;
 const nodeNum = 10;
 
+const relationType = ['amico', 'conoscente', 'parente', 'collega'];
+
 var createdUsers = [];
 var createdJudgements = [];
 
@@ -44,14 +46,16 @@ describe('RANDOM Evaluations', () => {
                     vote = {
                         professional: Math.floor((Math.random() * 5) + 1),
                         etical: null,
-                        personal: Math.floor((Math.random() * 5) + 1)
+                        personal: Math.floor((Math.random() * 5) + 1),
+                        type: relationType[Math.floor((Math.random() * 3))]
                     };
                     expectedAverage = (vote.professional + vote.personal) / 2;
                 } else {
                     vote = {
                         professional: Math.floor((Math.random() * 5) + 1),
                         etical: Math.floor((Math.random() * 5) + 1),
-                        personal: Math.floor((Math.random() * 5) + 1)
+                        personal: Math.floor((Math.random() * 5) + 1),
+                        type: relationType[Math.floor((Math.random() * 3))]
                     };
                     expectedAverage = (vote.professional + vote.etical + vote.personal) / 3;
                 }

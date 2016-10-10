@@ -122,7 +122,7 @@ function judge(referee, judged, value, next) {
  */
 function getJudgement(refereeId, judgedId, next) {
     var directCypher = `MATCH p=(a:User {uuid:'${refereeId}'})-[r:judge]->(b:User {uuid:'${judgedId}'}) ` +
-  "RETURN {average: r.average, etical: r.etical, personal: r.personal, professional: r.professional}";
+  "RETURN {average: r.average, etical: r.etical, personal: r.personal, professional: r.professional, type: r.type}";
     db.query(directCypher, {}, function(err, results) {
         if (err) {
             return next(err, null);
