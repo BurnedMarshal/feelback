@@ -97,14 +97,13 @@ function judge(referee, judged, value, next) {
             var average = 0;
             var size = 0;
             for (let val in value) {
-                if (Object.hasOwnProperty.call(value, val) && val !== 'type') { // Support type value in judgement
-                    console.log("Mi giro i value: ", value[val]);
+                if (Object.hasOwnProperty.call(value, val) && val !== 'type' && value[val] !== null) { // Support type value in judgement; bugfix null value
                     average += parseInt(value[val], 10);
                     size++;
+                } else if (value[val] === null) {
+                    delete value[val];
                 }
             }
-            console.log(average);
-            console.log(size);
             average /= size;
             value.average = average;
             relationship[0].properties = value;

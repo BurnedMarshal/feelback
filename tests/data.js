@@ -38,15 +38,30 @@ describe('RANDOM Evaluations', () => {
             if (referee === judjed) {
                 done();
             } else {
-                var vote = {
-                    professional: Math.floor((Math.random() * 5) + 1),
-                    etical: Math.floor((Math.random() * 5) + 1),
-                    personal: Math.floor((Math.random() * 5) + 1)
-                };
-                var expectedAverage = (vote.professional + vote.etical + vote.personal) / 3;
+                var vote = null;
+                var expectedAverage = null;
+                if (i === 0) { // Special condition with null vote
+                    vote = {
+                        professional: Math.floor((Math.random() * 5) + 1),
+                        etical: null,
+                        personal: Math.floor((Math.random() * 5) + 1)
+                    };
+                    expectedAverage = (vote.professional + vote.personal) / 2;
+                } else {
+                    vote = {
+                        professional: Math.floor((Math.random() * 5) + 1),
+                        etical: Math.floor((Math.random() * 5) + 1),
+                        personal: Math.floor((Math.random() * 5) + 1)
+                    };
+                    expectedAverage = (vote.professional + vote.etical + vote.personal) / 3;
+                }
+
                 User.judge(createdUsers[referee], createdUsers[judjed], vote, function(err, relationship) {
                     should.not.exist(err, 'no error creating relationship');
                     vote.average = expectedAverage;
+                    if (vote.etical === null) { // Special condition clear null field in vote
+                        delete vote.etical;
+                    }
                     assert.deepEqual(relationship, {
                         start: createdUsers[referee].id,
                         end: createdUsers[judjed].id,
@@ -63,6 +78,9 @@ describe('RANDOM Evaluations', () => {
                         }
                     }
                     if (!found) {
+                        if (i === 0) { // Special case add null value in relationship for future check in test
+                            relationship.properties.etical = null;
+                        }
                         createdJudgements.push(relationship);
                     }
 
