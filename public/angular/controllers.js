@@ -133,6 +133,18 @@ angular.module('feelback')
               alignment: 'left' // Displays dropdown with edge aligned to the left of button
           });
       }, 10);
+
+      var getJudgement = function() {
+          Judgement.get($routeParams.id)
+          .error(function(data, status) {
+              $scope.judgement = {};
+              console.error(data);
+          }).success(function(data) {
+              $scope.judgement = data.judgement;
+              console.log("Judgement: ", $scope.judgement);
+          });
+      };
+
       User.get($routeParams.id)
       .error(function(data, status) {
           if (status === 404) {
@@ -142,14 +154,7 @@ angular.module('feelback')
           }
       }).success(function(data) {
           $scope.user = data;
-          Judgement.get($routeParams.id)
-          .error(function(data, status) {
-              $scope.judgement = {};
-              console.error(data);
-          }).success(function(data) {
-              $scope.judgement = data.judgement;
-              console.log("Judgement: ", $scope.judgement);
-          });
+          getJudgement();
           Judgement.direct($routeParams.id)
           .error(function(data, status) {
               $scope.myJudgement = {};
@@ -190,6 +195,7 @@ angular.module('feelback')
             .success(function(data, status) {
                 $scope.myJudgement = {};
                 $scope.directJudgement = {};
+                getJudgement();
                 $('#unknown').removeClass('blue').addClass('yellow');
             });
       };
@@ -201,6 +207,7 @@ angular.module('feelback')
               console.error(data);
           }).success(function(data) {
               $scope.directJudgement = data.judgement;
+              getJudgement();
               $('.vote-button').removeClass('yellow');
               $('.vote-button').addClass('blue');
               $('#modalVote').closeModal();
