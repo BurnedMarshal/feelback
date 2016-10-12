@@ -18,3 +18,43 @@
   margin: 0 auto;
   margin-bottom: 30px;
 }
+
+a.vote-button{
+  border-radius: 0;
+  width: 18%;
+  margin-right: 2%;
+  text-transform: lowercase;
+  height: auto;
+  line-height: normal;
+  padding: 1rem 2rem;
+  font-size: 18px;
+}
+
+a.vote-button:last-child{
+  border-radius: 0;
+  width: 18%;
+  margin-right: 0;
+}
+
+.p-0{
+  padding: 0!important;
+}
+
+.interrogative{
+  padding: 10px 0;
+  font-size: 130px;
+  color: #199dc5;
+}
+
+.title-card{
+  background-color: #199dc5;
+  color: #ffffff;
+  padding: 6px 0;
+  font-size: 20px;
+}
+
+.footer-card{
+  padding: 5px 2px;
+  color: #ccc;
+  font-size: 10px;
+}
