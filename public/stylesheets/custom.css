@@ -26,7 +26,7 @@ a.vote-button{
   text-transform: lowercase;
   height: auto;
   line-height: normal;
-  padding: 1rem 2rem;
+  padding: 1rem;
   font-size: 18px;
 }
 
@@ -117,4 +117,8 @@ a.vote-button:last-child{
 
 .text-table{
   font-size: 26px;
+}
+
+.yellow.darken-2{
+  background-color: #1999da!important;
 }

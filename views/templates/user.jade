@@ -104,9 +104,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera personale
-                    h1(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal") 
-                    .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.personal && directJudgement !== null') X
+                    .item-vote.item-vote-color-dispari(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal")
+                    .item-vote.item-vote-color-dispari(ng-if='directJudgement === null') ?
+                    .item-vote.item-vote-color-dispari(ng-if='!judgement.personal && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               .col.s4
@@ -130,4 +130,4 @@ section#content
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               
-include ../partials/footer.jade
+//include ../partials/footer.jade
