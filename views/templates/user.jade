@@ -15,11 +15,11 @@ section#content
               span.item-card(ng-bind='userLocation()')
               span.item-card(ng-bind='userWork()')
         .col.s12.m9.l9
-          div(style="height:328px")
+          div(style="height:329px; position:relative")
             .row
               .col.s12
                 h1.text-center Che tipo di relazione hai con questa persona?
-            .row
+            .row.vote-button-row
               .col.s12
                 a#friend.vote-button.waves-effect.waves-light.btn.darken-2.modal-trigger(ng-click='vote("amico")', ng-class="directJudgement.type === 'amico' ? 'yellow' : 'blue'") amico
                 a#family.vote-button.waves-effect.waves-light.btn.darken-2(ng-click='vote("parente")', ng-class="directJudgement.type === 'parente' ? 'yellow' : 'blue'") parente
@@ -29,74 +29,74 @@ section#content
               #modalVote.modal
                   .modal-content
                     .row.center
-                      h3 dai una valutazione a questo tuo "{{newType}}"
-                      p se non conosci questa persona ti consigliamo di non valutarla. Ogni tua valutazione influenzerà la tua personale visione degli altri utenti della piattaforma.
+                      h3.modal-vote dai una valutazione a questo tuo "{{newType}}"
+                      p.modal-vote se non conosci questa persona ti consigliamo di non valutarla. Ogni tua valutazione influenzerà la tua personale visione degli altri utenti della piattaforma.
                     .row
                       .col.s12.m12.l12
                           table
                             thead
                               tr
-                                th(data-field='id')
-                                th(data-field='1') 1
-                                th(data-field='2') 2
-                                th(data-field='3') 3
-                                th(data-field='4') 4
-                                th(data-field='5') 5
+                                th.text-center(data-field='id')
+                                th.text-center(data-field='1') 1
+                                th.text-center(data-field='2') 2
+                                th.text-center(data-field='3') 3
+                                th.text-center(data-field='4') 4
+                                th.text-center(data-field='5') 5
                             tbody
                               tr
-                                td Sfera personale
-                                td
+                                td.text-table Sfera personale
+                                td.text-center
                                   input#personal1(name="personal", type="radio", ng-model='myJudgement.personal', value='1')
                                   label(for="personal1")
-                                td
+                                td.text-center
                                   input#personal2(name="personal", type="radio", ng-model='myJudgement.personal', value='2')
                                   label(for="personal2")
-                                td
+                                td.text-center
                                   input#personal3(name="personal", type="radio", ng-model='myJudgement.personal', value='3')
                                   label(for="personal3")
-                                td
+                                td.text-center
                                   input#personal4(name="personal", type="radio", ng-model='myJudgement.personal', value='4')
                                   label(for="personal4")
-                                td
+                                td.text-center
                                   input#personal5(name="personal", type="radio", ng-model='myJudgement.personal', value='5')
                                   label(for="personal5")
                               tr
-                                td Sfera etica
-                                td
+                                td.text-table Sfera etica
+                                td.text-center
                                   input#etical1(name="etical", type="radio", ng-model='myJudgement.etical', value='1')
                                   label(for="etical1")
-                                td
+                                td.text-center
                                   input#etical2(name="etical", type="radio", ng-model='myJudgement.etical', value='2')
                                   label(for="etical2")
-                                td
+                                td.text-center
                                   input#etical3(name="etical", type="radio", ng-model='myJudgement.etical', value='3')
                                   label(for="etical3")
-                                td
+                                td.text-center
                                   input#etical4(name="etical", type="radio", ng-model='myJudgement.etical', value='4')
                                   label(for="etical4")
-                                td
+                                td.text-center
                                   input#etical5(name="etical", type="radio", ng-model='myJudgement.etical', value='5')
                                   label(for="etical5")
                               tr
-                                td Sfera professionale
-                                td
+                                td.text-table Sfera professionale
+                                td.text-center
                                   input#professional1(name="professional", type="radio", ng-model='myJudgement.professional', value='1')
                                   label(for="professional1")
-                                td
+                                td.text-center
                                   input#professional2(name="professional", type="radio", ng-model='myJudgement.professional', value='2')
                                   label(for="professional2")
-                                td
+                                td.text-center
                                   input#professional3(name="professional", type="radio", ng-model='myJudgement.professional', value='3')
                                   label(for="professional3")
-                                td
+                                td.text-center
                                   input#professional4(name="professional", type="radio", ng-model='myJudgement.professional', value='4')
                                   label(for="professional4")
-                                td
+                                td.text-center
                                   input#professional5(name="professional", type="radio", ng-model='myJudgement.professional', value='5')
                                   label(for="professional5")
-                  .modal-footer.teal.lighten-4
-                    .waves-effect.waves-red.btn-flat.modal-action.modal-close(href="#") Annulla
-                    .waves-effect.waves-green.btn-flat(ng-click='judge()') Vota
+                  .modal-footer.blue.darken-2
+                    .waves-effect.waves-red.btn-flat.modal-action.modal-close.white-text(href="#") Annulla
+                    .waves-effect.waves-green.btn-flat.white-text(ng-click='judge()') Vota
           #card-stats
             .row
               .col.s4
@@ -104,9 +104,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera personale
-                    h1(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal") 
-                    .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.personal && directJudgement !== null') X
+                    .item-vote.item-vote-color-dispari(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal")
+                    .item-vote.item-vote-color-dispari(ng-if='directJudgement === null') ?
+                    .item-vote.item-vote-color-dispari(ng-if='!judgement.personal && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               .col.s4
@@ -114,9 +114,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera etica
-                    h1(ng-bind-html='judgement.etical.toFixed(2)', ng-if="directJudgement !== null && judgement.etical")
-                    .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.etical && directJudgement !== null') X
+                    .item-vote.item-vote-color-pari(ng-bind-html='judgement.etical.toFixed(2)', ng-if="directJudgement !== null && judgement.etical")
+                    .item-vote.item-vote-color-pari(ng-if='directJudgement === null') ?
+                    .item-vote.item-vote-color-pari(ng-if='!judgement.etical && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               .col.s4
@@ -124,9 +124,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera professionale
-                    h1(ng-bind-html='judgement.professional.toFixed(2)', ng-if="directJudgement !== null && judgement.professional")
-                    .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.professional && directJudgement !== null') X
+                    .item-vote.item-vote-color-dispari(ng-bind-html='judgement.professional.toFixed(2)', ng-if="directJudgement !== null && judgement.professional")
+                    .item-vote.item-vote-color-dispari(ng-if='directJudgement === null') ?
+                    .item-vote.item-vote-color-dispari(ng-if='!judgement.professional && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               

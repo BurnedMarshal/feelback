@@ -40,10 +40,18 @@ a.vote-button:last-child{
   padding: 0!important;
 }
 
-.interrogative{
+.item-vote{
   padding: 10px 0;
   font-size: 130px;
+  display: block;
+}
+
+.item-vote-color-dispari{
   color: #199dc5;
+}
+
+.item-vote-color-pari{
+  color: #26b4cb;
 }
 
 .title-card{
@@ -57,4 +65,56 @@ a.vote-button:last-child{
   padding: 5px 2px;
   color: #ccc;
   font-size: 10px;
+}
+
+.card{
+  border: 1px solid #e4e3e3;
+
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav{
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
+
+}
+
+.vote-button-row{
+  position: absolute;
+  bottom: 14px;
+  width: 100%;
+}
+
+[type="radio"]:checked + label:after {
+  border: 2px solid #1976D2;
+  background-color: #1976D2;
+}
+
+[type="radio"] + label:before, [type="radio"] + label:after{
+  width: 26px;
+  height: 26px;
+}
+
+[type="radio"]:not(:checked) + label:before{
+  border: 1px solid #5a5a5a;
+  background-color: #fff;
+}
+
+#modalVote.modal{
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+#modalVote.modal .modal-content{
+  padding: 10px 25px;
+}
+
+#modalVote h3.modal-vote{
+  font-size: 2rem;
+}
+
+#modalVote p.modal-vote{
+  font-weight: 300;
+}
+
+.text-table{
+  font-size: 26px;
 }
