@@ -4,18 +4,16 @@ section#content
   .container
     #user-app.content
       .row
-        .col.s12.m4.l4
+        .col.s12.m3.l3
           #profile-card.card
-            .card-image.waves-effect.waves-block.waves-light
-              //img.activator(ng-src='images/user-bg.jpg', alt='user bg')
-            .card-content
-              img.circle.responsive-img.activator.card-profile-image(ng-src='{{user.picture}}', alt='')
+            .card-content.text-center
+              img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
               //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
                 i.mdi-editor-mode-edit
-              span.card-title.activator.grey-text.text-darken-4(ng-bind='user.name')
-              p(ng-bind='user.birthday')
-              p(ng-bind='userLocation()')
-              p(ng-bind='userWork()')
+              span.name(ng-bind='user.name')
+              span.item-card(ng-bind='user.birthday')
+              span.item-card(ng-bind='userLocation()')
+              span.item-card(ng-bind='userWork()')
             //.card-reveal
               span.card-title.grey-text.text-darken-4
                 | Roger Waters 

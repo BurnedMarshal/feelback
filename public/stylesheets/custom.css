@@ -1,3 +1,20 @@
 .text-center {
   text-align: center;
 }
+
+#profile-card span.item-card{
+  display: block;
+  font-size: 1.1rem;
+}
+
+#profile-card .name{
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+#profile-card .profile-image{
+  width: 140px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
