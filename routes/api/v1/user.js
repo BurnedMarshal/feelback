@@ -27,15 +27,19 @@ router.get('/search', function(req, res) {
             'use strict';
             if (err) return res.status(500).send({message: 'Internal server error'});
             var usersFound = [];
-            for (let i = 0; i < users.length; i++) {
-                let user = {
-                    name: users[i].name,
-                    uuid: users[i].uuid,
-                    picture: users[i].picture
-                };
-                usersFound.push(user);
+            if (users) {
+                for (let i = 0; i < users.length; i++) {
+                    let user = {
+                        name: users[i].name,
+                        uuid: users[i].uuid,
+                        picture: users[i].picture
+                    };
+                    usersFound.push(user);
+                }
+                res.status(200).send(usersFound);
+            } else {
+                res.status(404).send({message: 'User not found'});
             }
-            res.status(200).send(usersFound);
         });
     }
 });

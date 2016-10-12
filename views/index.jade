@@ -11,8 +11,8 @@ block content
             label(for='name') Nome
         .row
           ul.collection.col.s4(ng-if='usersFound')
-            li.collection-item.avatar(ng-repeat='user in usersFound')
-              div(ng-if='usersFound.indexOf(user) < 7', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+            li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index < 7')
+              div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')
                 span.title(ng-bind-html='user.name')
                 //p
@@ -20,8 +20,8 @@ block content
                   br
                   |  Second Line
           ul.collection.col.s4(ng-if='usersFound && usersFound.length > 6')
-            li.collection-item.avatar(ng-repeat='user in usersFound')
-              a(ng-if='usersFound.indexOf(user) < 13 && usersFound.indexOf(user) > 6', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+            li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index > 6 && $index < 13')
+              div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')
                 span.title(ng-bind-html='user.name')
                 //p
@@ -29,8 +29,8 @@ block content
                   br
                   |  Second Line
           ul.collection.col.s4(ng-if='usersFound && usersFound.length > 12')
-            li.collection-item.avatar(ng-repeat='user in usersFound')
-              a(ng-if='usersFound.indexOf(user) < 19 && usersFound.indexOf(user) > 12', ng-click="goTo('/' + lang + '/users/' + user.uuid)")
+            li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index > 12 && $index < 19')
+              div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')
                 span.title(ng-bind-html='user.name')
                 //p
