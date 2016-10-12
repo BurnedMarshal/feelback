@@ -104,9 +104,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera personale
-                    h1(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal") 
+                    .interrogative(ng-bind-html='judgement.personal.toFixed(2)', ng-if="directJudgement !== null && judgement.personal") 
                     .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.personal && directJudgement !== null') X
+                    .interrogative(ng-if='!judgement.personal && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               .col.s4
@@ -114,9 +114,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera etica
-                    h1(ng-bind-html='judgement.etical.toFixed(2)', ng-if="directJudgement !== null && judgement.etical")
+                    .interrogative(ng-bind-html='judgement.etical.toFixed(2)', ng-if="directJudgement !== null && judgement.etical")
                     .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.etical && directJudgement !== null') X
+                    .interrogative(ng-if='!judgement.etical && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               .col.s4
@@ -124,9 +124,9 @@ section#content
                   .card-content.white-text.p-0
                     .title-card
                       span sfera professionale
-                    h1(ng-bind-html='judgement.professional.toFixed(2)', ng-if="directJudgement !== null && judgement.professional")
+                    .interrogative(ng-bind-html='judgement.professional.toFixed(2)', ng-if="directJudgement !== null && judgement.professional")
                     .interrogative(ng-if='directJudgement === null') ?
-                    h1(ng-if='!judgement.professional && directJudgement !== null') X
+                    .interrogative(ng-if='!judgement.professional && directJudgement !== null') X
                     .footer-card
                       span I valori visualizzati non sono assoluti, ma relativi
               
