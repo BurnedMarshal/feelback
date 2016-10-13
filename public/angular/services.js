@@ -17,6 +17,12 @@ angular.module('feelback')
           },
           search: function(query) {
               return $http.get('/api/v1/users/search?name=' + query);
+          },
+          stats: function(id) {
+              return $http.get('/api/v1/users/' + id + '/stats');
+          },
+          addView: function(id) {
+              return $http.post('/api/v1/users/' + id + '/view');
           }
       };
   }])

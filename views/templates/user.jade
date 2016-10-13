@@ -37,21 +37,21 @@ section#content
                 .stats-card
                   p Voti ricevuti questo mese
                   .container-line-vote.vote-one-line-color
-                    span.total-vote 300 totale voti ricevuti
+                    span.total-vote totale voti ricevuti
                     .bullet-vote.vote-one-bullet-color(style="width:18%")
-                      span.effective-vote 18
+                      span.effective-vote(ng-bind-html='stats.networkInCount')
                 .stats-card
                   p Voti dati questo mese
                   .container-line-vote.vote-two-line-color
-                    span.total-vote 420 totale voti dati
-                    .bullet-vote.vote-two-bullet-color(style="width:23%")
-                      span.effective-vote 23
+                    span.total-vote totale voti dati
+                    .bullet-vote.vote-two-bullet-color(style="width:18%")
+                      span.effective-vote(ng-bind-html='stats.networkOutCount')
                 .stats-card
                   p Visualizzazioni del profilo questo mese
                   .container-line-vote.vote-three-line-color
-                    span.total-vote 1500 totale voti ricevuti
-                    .bullet-vote.vote-three-bullet-color(style="width:43%")
-                      span.effective-vote 43
+                    span.total-vote totale voti ricevuti
+                    .bullet-vote.vote-three-bullet-color(style="width:18%")
+                      span.effective-vote(ng-bind-html='user.views ? user.views : 0')
 
           .col.s3
             .card

@@ -154,6 +154,21 @@ angular.module('feelback')
           }
       }).success(function(data) {
           $scope.user = data;
+          User.stats($routeParams.id)
+          .error(function(err) {
+              console.error(err);
+          })
+          .success(function(userStats) {
+              console.log('User Stats: ', userStats);
+              $scope.stats = userStats;
+          });
+          User.addView($routeParams.id)
+          .error(function(err) {
+              console.error(err);
+          })
+          .success(function(addViewResponse) {
+              console.log('User addView: ', addViewResponse);
+          });
           getJudgement();
           Judgement.direct($routeParams.id)
           .error(function(data, status) {

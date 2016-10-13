@@ -15,7 +15,9 @@ module.exports = {
     getJudgement: getJudgement,
     network: network,
     search: search,
-    deleteJudgement: deleteJudgement
+    deleteJudgement: deleteJudgement,
+    networkCount: networkCount,
+    addView: addView
 };
 
 /**
@@ -257,6 +259,50 @@ function deleteJudgement(refereeId, judgedId, next) {
             next(null, results[0]);
         } else {
             next(null, null);
+        }
+    });
+}
+
+/**
+ * [networkInCount description]
+ * @param  {[type]}   userId [description]
+ * @param  {Function} next   [description]
+ */
+function networkCount(userId, next) {
+    var cypher = `OPTIONAL MATCH (l:User)-[r:judge]->(n:User) WHERE n.uuid = '${userId}' ` +
+    `OPTIONAL MATCH (n2:User)-[r2:judge]->(l2:User) WHERE n2.uuid = '${userId}' ` +
+    'RETURN COUNT(r) as networkInCount, COUNT(r2) as networkOutCount';
+    db.query(cypher, {}, function(err, results) {
+        if (err) {
+            return next(err, null);
+        }
+        if (results && results.length === 1) {
+            next(null, results[0]);
+        } else {
+            next(null, {networkInCount: 0, networkOutCount: 0});
+        }
+    });
+}
+
+/**
+ * [addView description]
+ * @param {[type]}   userId [description]
+ * @param {Function} next   [description]
+ */
+function addView(userId, next) {
+    find(userId, function(err, user) {
+        if (user) {
+            if (user.views !== null && user.views !== undefined)
+                user.views += 1;
+            else {
+                user.views = 1;
+            }
+            save(user, function(err, updatedUser) {
+                if (err) next(err, null);
+                else next(null, updatedUser);
+            });
+        } else {
+            next(err, null); // User not found
         }
     });
 }

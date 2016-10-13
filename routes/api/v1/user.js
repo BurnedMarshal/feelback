@@ -58,4 +58,30 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.get('/:id/stats/', function(req, res) {
+    User.networkCount(req.params.id, function(err, stats) {
+        if (err) {
+            return res.status(500).send({message: 'Internal server error'});
+        }
+        if (stats) {
+            res.send(stats);
+        } else {
+            res.status(404).send({message: 'User not found'});
+        }
+    });
+});
+
+router.post('/:id/view/', function(req, res) {
+    User.addView(req.params.id, function(err, stats) {
+        if (err) {
+            return res.status(500).send({message: 'Internal server error'});
+        }
+        if (stats) {
+            res.status(200).send({message: 'OK'});
+        } else {
+            res.status(404).send({message: 'User not found'});
+        }
+    });
+});
+
 module.exports = router;
