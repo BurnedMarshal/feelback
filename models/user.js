@@ -269,9 +269,9 @@ function deleteJudgement(refereeId, judgedId, next) {
  * @param  {Function} next   [description]
  */
 function networkCount(userId, next) {
-    var cypher = `OPTIONAL MATCH (l:User)-[r:judge]->(n:User) WHERE n.uuid = '${userId}' ` +
-    `OPTIONAL MATCH (n2:User)-[r2:judge]->(l2:User) WHERE n2.uuid = '${userId}' ` +
-    'RETURN COUNT(r) as networkInCount, COUNT(r2) as networkOutCount';
+    var cypher = `OPTIONAL MATCH (l:User)-[r:judge]->(n:User) WHERE n.uuid = '${userId}' WITH COUNT(r) as networkInCount ` +
+    `OPTIONAL MATCH (n2:User)-[r2:judge]->(l2:User) WHERE n2.uuid = '${userId}' WITH networkInCount, COUNT(r2) as networkOutCount ` +
+    'RETURN networkInCount, networkOutCount';
     db.query(cypher, {}, function(err, results) {
         if (err) {
             return next(err, null);
