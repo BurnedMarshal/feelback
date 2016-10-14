@@ -235,6 +235,9 @@ h1.text-title-cover{
 
   }
 
+  .search-bar{
+    padding: 14px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -258,4 +261,8 @@ h1.text-title-cover{
   a.vote-button{
     font-size: 14px;
   }
+}
+
+header .brand-logo{
+  margin: 0;
 }
