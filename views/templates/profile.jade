@@ -5,15 +5,19 @@ section#content
     #user-app.content
       .row
         .col.s12.m3.l3
-          #profile-card.card
-            .card-content.text-center
-              img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-              //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-                i.mdi-editor-mode-edit
-              span.name(ng-bind='user.name')
-              span.item-card(ng-bind='user.birthday')
-              span.item-card(ng-bind='userLocation()')
-              span.item-card(ng-bind='userWork()')
+          h5 Il tuo profilo
+          .col.s12.m12.l12
+            #profile-card.card
+              .card-content.text-center
+                img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
+                //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
+                  i.mdi-editor-mode-edit
+                span.name(ng-bind='user.name')
+                span.item-card(ng-bind='user.birthday')
+                span.item-card(ng-bind='userLocation()')
+                span.item-card(ng-bind='userWork()')
+        .col.s12.m9.l9
+          include ../partials/recommendPeople.jade
             //.card-reveal
               span.card-title.grey-text.text-darken-4
                 | Roger Waters 

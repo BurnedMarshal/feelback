@@ -35,19 +35,19 @@ section#content
                 .title-card(style="background-color:#19768a")
                   span statistiche
                 .stats-card
-                  p Voti ricevuti questo mese
+                  p &nbsp;
                   .container-line-vote.vote-one-line-color
-                    span.total-vote totale voti ricevuti
+                    span.total-vote valutazioni ricevute
                     .bullet-vote.vote-one-bullet-color(style="width:18%")
                       span.effective-vote(ng-bind-html='stats.networkInCount')
                 .stats-card
-                  p Voti dati questo mese
+                  p &nbsp;
                   .container-line-vote.vote-two-line-color
-                    span.total-vote totale voti dati
+                    span.total-vote valutazioni date
                     .bullet-vote.vote-two-bullet-color(style="width:18%")
                       span.effective-vote(ng-bind-html='stats.networkOutCount')
                 .stats-card
-                  p Visualizzazioni del profilo questo mese
+                  p &nbsp;
                   .container-line-vote.vote-three-line-color
                     span.total-vote totale visualizzazioni
                     .bullet-vote.vote-three-bullet-color(style="width:18%")
@@ -83,7 +83,10 @@ section#content
                 .item-vote.item-vote-color-dispari(ng-if='!judgement.professional && directJudgement !== null') X
                 .footer-card
                   span I valori visualizzati non sono assoluti, ma relativi
-
+      #recommendPeople
+        .row
+          .col.s12.m12.l12
+            include ../partials/recommendPeople.jade
 #modalVote.modal
   .modal-content
     .row.center
