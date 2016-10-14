@@ -18,9 +18,9 @@ section#content
           div(style="height:329px; position:relative")
             .row
               .col.s12
-                h1.text-center Che tipo di relazione hai con questa persona?
+                h1.text-center.text-title-cover Che tipo di relazione hai con questa persona?
             .row.vote-button-row
-              .col.s12
+              .col.s12.m12.l12
                 a#friend.vote-button.waves-effect.waves-light.btn.darken-2.modal-trigger(ng-click='vote("amico")', ng-class="directJudgement.type === 'amico' ? 'yellow' : 'blue'") amico
                 a#family.vote-button.waves-effect.waves-light.btn.darken-2(ng-click='vote("parente")', ng-class="directJudgement.type === 'parente' ? 'yellow' : 'blue'") parente
                 a#work.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")', ng-class="directJudgement.type === 'collega' ? 'yellow' : 'blue'") collega
@@ -29,7 +29,7 @@ section#content
 
       #card-stats
         .row
-          .col.s3
+          .col.s12.m3.l3
             .card
               .card-content.p-0.stats-content
                 .title-card(style="background-color:#19768a")
@@ -53,7 +53,7 @@ section#content
                     .bullet-vote.vote-three-bullet-color(style="width:18%")
                       span.effective-vote(ng-bind-html='user.views ? user.views : 0')
 
-          .col.s3
+          .col.s12.m3.l3
             .card
               .card-content.white-text.p-0
                 .title-card
@@ -63,7 +63,7 @@ section#content
                 .item-vote.item-vote-color-dispari(ng-if='!judgement.personal && directJudgement !== null') X
                 .footer-card
                   span I valori visualizzati non sono assoluti, ma relativi
-          .col.s3
+          .col.s12.m3.l3
             .card
               .card-content.white-text.p-0
                 .title-card
@@ -73,7 +73,7 @@ section#content
                 .item-vote.item-vote-color-pari(ng-if='!judgement.etical && directJudgement !== null') X
                 .footer-card
                   span I valori visualizzati non sono assoluti, ma relativi
-          .col.s3
+          .col.s12.m3.l3
             .card
               .card-content.white-text.p-0
                 .title-card
