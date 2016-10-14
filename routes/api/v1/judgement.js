@@ -24,4 +24,8 @@ router.get('/:referee/:judged', util.bypassLogin, judgement.judgeScore, function
     res.status(200).json({judgement: req.judgement});
 });
 
+router.get('/:referee/:judged/extended', util.bypassLogin, judgement.judgeScoreExtended, function(req, res) {
+    res.status(200).json({judgements: req.judgements});
+});
+
 module.exports = router;

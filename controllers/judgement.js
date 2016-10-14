@@ -17,6 +17,22 @@ function judgeScore(req, res, next) {
 }
 
 /**
+ * Calculate extended judgements path from current user to another
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ */
+function judgeScoreExtended(req, res, next) {
+    User.judgementsExtended(req.user, req.params.userId, function(err, judgements) {
+        if (err) {
+            return res.status(500).send({message: 'Internal Server Error', error: err});
+        }
+        req.judgements = judgements;
+        next();
+    });
+}
+
+/**
  * Update or create judgement from referee to judged user
  * @param  {[type]}   req  [description]
  * @param  {[type]}   res  [description]
@@ -67,3 +83,4 @@ module.exports.judgeScore = judgeScore;
 module.exports.judge = judge;
 module.exports.directJudgement = directJudgement;
 module.exports.deleteJudgement = deleteJudgement;
+module.exports.judgeScoreExtended = judgeScoreExtended;
