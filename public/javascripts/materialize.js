@@ -633,6 +633,7 @@ if ($) { Vel = $.Velocity } else { Vel = Velocity};
       });
 
       $("#lean-overlay").css({ display : "block", opacity : 0 });
+      $("body").css(overflow-y, "hidden");
 
       $(modal).css({
         display : "block",
@@ -684,6 +685,8 @@ if ($) { Vel = $.Velocity } else { Vel = Velocity};
       var options = $.extend(defaults, options);
 
       $('.modal-close').off();
+      $("body").css(overflow-y, "auto");
+
       $(document).off('keyup.leanModal');
 
       $("#lean-overlay").velocity( { opacity: 0}, {duration: options.out_duration, queue: false, ease: "easeOutQuart"});

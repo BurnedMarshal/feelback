@@ -10,7 +10,7 @@ block content
             input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
             label(for='name') Nome
         .row
-          ul.collection.col.s4(ng-if='usersFound')
+          ul.collection.col.s12.m6.l4(ng-if='usersFound')
             li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index < 7')
               div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')

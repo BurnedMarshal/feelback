@@ -87,12 +87,12 @@ section#content
         .row
           .col.s12.m12.l12
             include ../partials/recommendPeople.jade
-#modalVote.modal
+#modalVote.modal.modal-fixed-footer
   .modal-content
     .row.center
       h3.modal-vote dai una valutazione a questo tuo "{{newType}}"
       p.modal-vote se non conosci questa persona ti consigliamo di non valutarla. Ogni tua valutazione influenzerà la tua personale visione degli altri utenti della piattaforma.
-    .row
+    .row(style="margin-bottom:60px")
       .col.s12.m12.l12
         table
           thead
