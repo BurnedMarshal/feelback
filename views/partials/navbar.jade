@@ -12,6 +12,10 @@ header#header.page-topbar
             li.search-out(style='display: none;')
               input.search-out-text(type='text')
             li
+              .input-field.col.s12
+                input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
+                label(for='name') Nome
+            li
               .waves-effect.waves-block.waves-light.show-search(ng-click='searchModal()')
                 i.mdi-action-search
             li

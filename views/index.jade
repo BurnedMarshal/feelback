@@ -10,7 +10,7 @@ block content
             input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
             label(for='name') Nome
         .row
-          ul.collection.col.s12.m6.l4(ng-if='usersFound')
+          ul.collection.search-user.col.s12.m6.l4(ng-if='usersFound')
             li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index < 7')
               div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')
@@ -19,7 +19,7 @@ block content
                   | First Line
                   br
                   |  Second Line
-          ul.collection.col.s4(ng-if='usersFound && usersFound.length > 6')
+          ul.collection.search-user.col.s12.m6.l4(ng-if='usersFound && usersFound.length > 6')
             li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index > 6 && $index < 13')
               div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')
@@ -28,7 +28,7 @@ block content
                   | First Line
                   br
                   |  Second Line
-          ul.collection.col.s4(ng-if='usersFound && usersFound.length > 12')
+          ul.collection.search-user.col.s12.m6.l4(ng-if='usersFound && usersFound.length > 12')
             li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index > 12 && $index < 19')
               div(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                 img.circle(ng-src='{{user.picture}}')

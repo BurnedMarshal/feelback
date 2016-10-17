@@ -1,51 +1,47 @@
-h5 Persone che potresti conoscere
-.col.s6.m3.l3
-  #profile-card.card
-      .card-content.text-center
-          img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-          //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-            i.mdi-editor-mode-edit
-          span.name(ng-bind='user.name')
-          span.item-card(ng-bind='user.birthday')
-          span.item-card(ng-bind='userLocation()')
-          span.item-card(ng-bind='userWork()')
-.col.s6.m3.l3
-  #profile-card.card
-      .card-content.text-center
-          img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-          //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-            i.mdi-editor-mode-edit
-          span.name(ng-bind='user.name')
-          span.item-card(ng-bind='user.birthday')
-          span.item-card(ng-bind='userLocation()')
-          span.item-card(ng-bind='userWork()')
-.col.s6.m3.l3
-  #profile-card.card
-      .card-content.text-center
-          img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-          //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-            i.mdi-editor-mode-edit
-          span.name(ng-bind='user.name')
-          span.item-card(ng-bind='user.birthday')
-          span.item-card(ng-bind='userLocation()')
-          span.item-card(ng-bind='userWork()')
-.col.s6.m3.l3
-  #profile-card.card
-      .card-content.text-center
-          img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-          //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-            i.mdi-editor-mode-edit
-          span.name(ng-bind='user.name')
-          span.item-card(ng-bind='user.birthday')
-          span.item-card(ng-bind='userLocation()')
-          span.item-card(ng-bind='userWork()')
-.col.s6.m3.l3
-  #profile-card.card
-      .card-content.text-center
-          img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-          //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-            i.mdi-editor-mode-edit
-          span.name(ng-bind='user.name')
-          span.item-card(ng-bind='user.birthday')
-          span.item-card(ng-bind='userLocation()')
-          span.item-card(ng-bind='userWork()')
+.recommendPeople
+    .card
+        .card-content.p-0
+            .title-card
+                span.p-10 Persone che potresti conoscere
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
+            .col.s6.m3.l3
+                ul.collection
+                    li.collection-item.avatar.recommendPeople-block
+                        img.circle(ng-src='{{user.picture}}', alt='')
+                        span.name(ng-bind='user.name')
+                        p
+                            span.item-card(ng-bind='userLocation()')
