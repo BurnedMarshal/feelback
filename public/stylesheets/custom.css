@@ -291,14 +291,21 @@ header .brand-logo{
 }
 
 .recommendPeople-block{
-  height: auto!important;
+  height: 64px!important;
   max-height: 110px;
   cursor: pointer;
-
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  -ms-transition: 0.25s;
+  transition: 0.25s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
 .recommendPeople-block:hover {
-  background-color: #cccccc;
+  background-color: #efecec;
 
 }

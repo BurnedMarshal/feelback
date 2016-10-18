@@ -21,13 +21,13 @@ section#content
             .card-content.p-0
               .title-card
                 span.p-10 Persone che potresti conoscere
-              .col.s6.m3.l3
+              .col.s12.m6.l3(ng-repeat="user in usersrecommendedFound")
                 ul.collection
                   li.collection-item.avatar.recommendPeople-block
                     img.circle(ng-src='{{user.picture}}', alt='')
                     span.name(ng-bind='user.name')
                     p
-                      span.item-card(ng-bind='userLocation()')
+                      span.item-card("")
         .col.s12.m9.l9
           .card
             .card-content.p-0
@@ -39,7 +39,7 @@ section#content
                     img.circle(ng-src='{{user.picture}}', alt='')
                     span.name(ng-bind='user.name')
                     p
-                      span.item-card(ng-bind='userLocation()')
+                      span.item-card(ng-bind='JSON.parse($scope.user.location).name')
             //.card-reveal
               span.card-title.grey-text.text-darken-4
                 | Roger Waters 

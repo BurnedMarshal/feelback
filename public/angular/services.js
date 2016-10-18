@@ -19,7 +19,7 @@ angular.module('feelback')
               return $http.get('/api/v1/users/search?name=' + query);
           },
           recommendedPeople: function(query) {
-              return $http.get('/api/v1/users/search?name=' + query);
+              return $http.get('/api/v1/users/recommendedPeople?name=' + query);
           },
           stats: function(id) {
               return $http.get('/api/v1/users/' + id + '/stats');

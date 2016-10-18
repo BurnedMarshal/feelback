@@ -64,7 +64,7 @@ angular.module('feelback')
 
         $scope.recommendedPeople = function() {
 
-                User.recommendedPeople("G")
+                User.recommendedPeople()
                     .success(function(data) {
                         $scope.usersrecommendedFound = data;
                         console.log(data);
