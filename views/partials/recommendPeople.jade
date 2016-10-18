@@ -2,45 +2,10 @@
     .card
         .card-content.p-0
             .title-card
-                span.p-10 Persone che potresti conoscere
-            .col.s6.m3.l3
+                span.p-10 Persone che potresti conoscereeee
+            .col.s6.m3.l3(ng-repeat="user in usersrecommendedFound")
                 ul.collection
-                    li.collection-item.avatar.recommendPeople-block
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
-                        p
-                            span.item-card(ng-bind='userLocation()')
-            .col.s6.m3.l3
-                ul.collection
-                    li.collection-item.avatar.recommendPeople-block
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
-                        p
-                            span.item-card(ng-bind='userLocation()')
-            .col.s6.m3.l3
-                ul.collection
-                    li.collection-item.avatar.recommendPeople-block
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
-                        p
-                            span.item-card(ng-bind='userLocation()')
-            .col.s6.m3.l3
-                ul.collection
-                    li.collection-item.avatar.recommendPeople-block
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
-                        p
-                            span.item-card(ng-bind='userLocation()')
-            .col.s6.m3.l3
-                ul.collection
-                    li.collection-item.avatar.recommendPeople-block
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
-                        p
-                            span.item-card(ng-bind='userLocation()')
-            .col.s6.m3.l3
-                ul.collection
-                    li.collection-item.avatar.recommendPeople-block
+                    li.collection-item.avatar.recommendPeople-block(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
                         img.circle(ng-src='{{user.picture}}', alt='')
                         span.name(ng-bind='user.name')
                         p

@@ -18,6 +18,9 @@ angular.module('feelback')
           search: function(query) {
               return $http.get('/api/v1/users/search?name=' + query);
           },
+          recommendedPeople: function(query) {
+              return $http.get('/api/v1/users/search?name=' + query);
+          },
           stats: function(id) {
               return $http.get('/api/v1/users/' + id + '/stats');
           },

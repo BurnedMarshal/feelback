@@ -60,6 +60,23 @@ angular.module('feelback')
             }
         };
 
+
+
+        $scope.recommendedPeople = function() {
+
+                User.recommendedPeople("G")
+                    .success(function(data) {
+                        $scope.usersrecommendedFound = data;
+                        console.log(data);
+                    })
+                    .error(function(err, data) {
+                        if (err) console.log(err);
+                    });
+
+        };
+
+        $scope.recommendedPeople();
+
         $scope.goTo = function(path) {
             $('#modalSearch').closeModal();
             $location.path(path);
