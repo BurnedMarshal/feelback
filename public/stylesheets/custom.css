@@ -293,4 +293,12 @@ header .brand-logo{
 .recommendPeople-block{
   height: auto!important;
   max-height: 110px;
+  cursor: pointer;
+
+}
+
+
+.recommendPeople-block:hover {
+  background-color: #cccccc;
+
 }

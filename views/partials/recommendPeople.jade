@@ -2,7 +2,7 @@
     .card
         .card-content.p-0
             .title-card
-                span.p-10 Persone che potresti conoscereeee
+                span.p-10 Persone che potresti conoscere
             .col.s6.m3.l3(ng-repeat="user in usersrecommendedFound")
                 ul.collection
                     li.collection-item.avatar.recommendPeople-block(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
