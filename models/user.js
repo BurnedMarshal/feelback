@@ -16,6 +16,7 @@ module.exports = {
     getJudgement: getJudgement,
     network: network,
     search: search,
+    recommendedPeople: recommendedPeople,
     deleteJudgement: deleteJudgement,
     networkCount: networkCount,
     addView: addView
@@ -247,7 +248,7 @@ function judgementsExtended(startUserId, endUserId, next) {
  * @param  {Function} next   callback
  */
 function network(userId, next) {
-    var cypher = `MATCH (n:User)-[r:judge]->(l) WHERE n.uuid = '${userId}' return l`;
+    var cypher = `MATCH (n:User)-[r:judge]->(l) WHERE n.uuid = '${userId}' AND  r.average>=3 return l ORDER By r.average DESC`;
     db.query(cypher, {}, function(err, results) {
         if (err) {
             return next(err, null);
@@ -267,6 +268,27 @@ function network(userId, next) {
  */
 function search(name, next) {
     var searchCypher = `MATCH (n:User) WHERE n.name =~ "(?i).*${name}.*" AND NOT(EXISTS(n.isTemp)) RETURN n`;
+    db.query(searchCypher, {}, function(err, results) {
+        if (err) {
+            console.log(err);
+            return next(err, null);
+        }
+        if (results && results.length > 0) {
+            next(null, results);
+        } else {
+            next(null, null);
+        }
+    });
+}
+
+/**
+ * Get 12  user by random.
+ * TODO: fix to get real recommended people
+ * @param  {[type]}   name [description]
+ * @param  {Function} next [description]
+ */
+function recommendedPeople(name, next) {
+    var searchCypher = `MATCH (u:User) WITH u, rand() AS number RETURN u ORDER BY number LIMIT 12`;
     db.query(searchCypher, {}, function(err, results) {
         if (err) {
             console.log(err);

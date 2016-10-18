@@ -44,6 +44,34 @@ router.get('/search', function(req, res) {
     }
 });
 
+
+router.get('/recommendedPeople', function(req, res) {
+    if (req.query.name) {
+        User.recommendedPeople(req.query.name, function(err, users) {
+            'use strict';
+            if (err) return res.status(500).send({message: 'Internal server error'});
+            var usersFound = [];
+            if (users) {
+                for (let i = 0; i < users.length; i++) {
+                    let user = {
+                        name: users[i].name,
+                        uuid: users[i].uuid,
+                        location: users[i].location,
+                        picture: users[i].picture
+                    };
+                    usersFound.push(user);
+                }
+                res.status(200).send(usersFound);
+            } else {
+                res.status(404).send({message: 'User not found'});
+            }
+        });
+    }
+});
+
+
+
+
 router.get('/:id', function(req, res) {
     console.log(req.params.id);
     User.findById(req.params.id, function(err, user) {
@@ -57,6 +85,29 @@ router.get('/:id', function(req, res) {
         }
     });
 });
+
+router.get('/:id/trustpeople/', function(req, res) {
+    User.trustpeople(req.params.id, function(err, users) {
+        'use strict';
+        if (err) return res.status(500).send({message: 'Internal server error'});
+        var usersFound = [];
+        if (users) {
+            for (let i = 0; i < users.length; i++) {
+                let user = {
+                    name: users[i].name,
+                    uuid: users[i].uuid,
+                    location: users[i].location,
+                    picture: users[i].picture
+                };
+                usersFound.push(user);
+            }
+            res.status(200).send(usersFound);
+        } else {
+            res.status(404).send({message: 'User not found'});
+        }
+    });
+});
+
 
 router.get('/:id/stats/', function(req, res) {
     User.networkCount(req.params.id, function(err, stats) {

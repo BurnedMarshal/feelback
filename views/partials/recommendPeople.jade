@@ -3,10 +3,10 @@
         .card-content.p-0
             .title-card
                 span.p-10 Persone che potresti conoscere
-            .col.s12.m3.l3(ng-repeat="user in usersrecommendedFound")
+            .col.s12.m3.l3(ng-repeat="userX in usersrecommendedFound")
                 ul.collection
-                    li.collection-item.avatar.recommendPeople-block(ng-click="goTo('/' + lang + '/users/' + user.uuid)")
-                        img.circle(ng-src='{{user.picture}}', alt='')
-                        span.name(ng-bind='user.name')
+                    li.collection-item.avatar.recommendPeople-block(ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
+                        img.circle(ng-src='{{userX.picture}}', alt='')
+                        span.name(ng-bind='userX.name')
                         p
-                            span.item-card(ng-bind='JSON.parse($scope.user.location).name')
+                            span.item-card(ng-bind='userxLocation(userX)')

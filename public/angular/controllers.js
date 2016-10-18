@@ -45,6 +45,16 @@ angular.module('feelback')
             $('#modalSearch').openModal();
         };
 
+        $scope.recommendedPeople = function() {
+            User.recommendedPeople("temp")
+                .success(function(data) {
+                    $scope.usersrecommendedFound = data;
+                })
+                .error(function(err, data) {
+                    if (err) console.log(err);
+                });
+        };
+
         $scope.searchQuery = function() {
             if ($scope.searchString) {
                 User.search($scope.searchString)
@@ -60,22 +70,13 @@ angular.module('feelback')
             }
         };
 
-
-
-        $scope.recommendedPeople = function() {
-
-                User.recommendedPeople()
-                    .success(function(data) {
-                        $scope.usersrecommendedFound = data;
-                        console.log(data);
-                    })
-                    .error(function(err, data) {
-                        if (err) console.log(err);
-                    });
-
+        $scope.userxLocation = function(userX) {
+            try {
+                return JSON.parse(userX.location).name;
+            } catch (e) {
+                return '';
+            }
         };
-
-        $scope.recommendedPeople();
 
         $scope.goTo = function(path) {
             $('#modalSearch').closeModal();
@@ -134,8 +135,12 @@ angular.module('feelback')
             });
       };
   }])
-  .controller('userController', ['$scope', '$auth', '$location', '$routeParams', 'User', 'Judgement', function($scope, $auth, $location, $routeParams, User, Judgement) {
+  .controller('userController', ['$scope', '$auth', '$location', '$localStorage', '$routeParams', 'User', 'Judgement', function($scope, $auth, $location, $localStorage, $routeParams, User, Judgement) {
       console.log('userController');
+      if ($localStorage.currentUser.uuid === $routeParams.id) {
+          $location.path('/' + $scope.lang + '/users/' + $routeParams.id + '/me');
+      }
+
       $('body').removeClass('loaded');
       $('body').removeClass('cyan');
       setTimeout(function() {
@@ -150,6 +155,8 @@ angular.module('feelback')
               alignment: 'left' // Displays dropdown with edge aligned to the left of button
           });
       }, 10);
+
+      $scope.$parent.recommendedPeople();
 
       var getJudgement = function() {
           Judgement.get($routeParams.id)
@@ -256,6 +263,7 @@ angular.module('feelback')
         }
         $('body').removeClass('loaded');
         $('body').removeClass('cyan');
+        $scope.$parent.recommendedPeople();
         setTimeout(function() {
             $('#slide-out').perfectScrollbar();
             $('.dropdown-button').dropdown({
