@@ -288,7 +288,8 @@ function search(name, next) {
  * @param  {Function} next [description]
  */
 function recommendedPeople(name, next) {
-    var searchCypher = `MATCH (u:User) WITH u, rand() AS number RETURN u ORDER BY number LIMIT 12`;
+    // var searchCypher = `MATCH (u:User) WITH u, rand() AS number RETURN u ORDER BY number LIMIT 12`;
+    var searchCypher = `MATCH (u:User) RETURN u LIMIT 100`;
     db.query(searchCypher, {}, function(err, results) {
         if (err) {
             console.log(err);
