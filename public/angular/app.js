@@ -8,7 +8,7 @@ angular.module('feelback', ['ngRoute', 'pascalprecht.translate', 'satellizer', '
         $translateProvider.useSanitizeValueStrategy('escape');
 
         $authProvider.facebook({
-            clientId: '279341862458487',
+            clientId: '280806872311986',
             // responseType: 'token',
             requiredUrlParams: ['display', 'scope'],
             scope: ['email', 'user_friends', 'user_hometown', 'user_location', 'user_birthday', 'user_work_history'],
