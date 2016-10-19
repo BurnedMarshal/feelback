@@ -35,7 +35,7 @@ section#content
                 span.p-10 La tua cerchia
               .col.s12.m6.l3(ng-repeat="userX in network")
                 ul.collection
-                  li.collection-item.avatar.recommendPeople-block(ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
+                  li.collection-item.avatar.recommendPeople-block(onclick="scroolTop()",ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
                     img.circle(ng-src='{{userX.picture}}', alt='')
                     span.name(ng-bind='userX.name')
                     p
