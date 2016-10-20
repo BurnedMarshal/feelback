@@ -101,7 +101,7 @@ function judge(referee, judged, value, next) {
             var average = 0;
             var size = 0;
             for (let val in value) {
-                if (Object.hasOwnProperty.call(value, val) && val !== 'type' && value[val] !== null) { // Support type value in judgement; bugfix null value
+                if (Object.hasOwnProperty.call(value, val) && val !== 'type' && val !== 'average' && value[val] !== null) { // Support type value in judgement; bugfix null value
                     try {
                         value[val] = parseInt(value[val], 10); // Conversion from any to integer
                         average += value[val];
