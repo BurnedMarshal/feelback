@@ -212,6 +212,15 @@ angular.module('feelback')
               return '';
           }
       };
+
+      $scope.userHomeTown = function() {
+          try {
+              return JSON.parse($scope.user.hometown).name;
+          } catch (e) {
+              return '';
+          }
+      };
+
       $scope.userWork = function() {
           try {
               return JSON.parse($scope.user.work)[0].position.name;
@@ -292,6 +301,13 @@ angular.module('feelback')
         $scope.userLocation = function() {
             try {
                 return JSON.parse($scope.user.location).name;
+            } catch (e) {
+                return '';
+            }
+        };
+        $scope.userHomeTown = function() {
+            try {
+                return JSON.parse($scope.user.hometown).name;
             } catch (e) {
                 return '';
             }
