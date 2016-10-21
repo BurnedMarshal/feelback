@@ -5,18 +5,21 @@ section#content
     #user-app.content
       .row
         .col.s12.m3.l3
-          h5 Il tuo profilo
-          .col.s12.m12.l12
-            #profile-card.card
-              .card-content.text-center
-                img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
-                //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
-                  i.mdi-editor-mode-edit
-                span.name(ng-bind='user.name')
-                span.item-card(ng-bind='user.birthday')
-                span.item-card(ng-bind='userLocation()')
-                span.item-card(ng-bind='userHomeTown()')
-                span.item-card(ng-bind='userWork()')
+          .card
+            .card-content.p-0
+              .title-card
+                span.p-10 Il tuo profilo
+              .col.s12.m12.l12
+                #profile-card.card
+                  .card-content.text-center
+                    img.circle.responsive-img.profile-image(ng-src='{{user.picture}}', alt='')
+                    //a.btn-floating.activator.btn-move-up.waves-effect.waves-light.darken-2.right
+                      i.mdi-editor-mode-edit
+                    span.name(ng-bind='user.name')
+                    span.item-card(ng-bind='user.birthday')
+                    span.item-card(ng-bind='userLocation()')
+                    span.item-card(ng-bind='userHomeTown()')
+                    span.item-card(ng-bind='userWork()')
         .col.s12.m9.l9
           .card
             .card-content.p-0
@@ -29,18 +32,43 @@ section#content
                     span.name(ng-bind='userX.name')
                     p
                       span.item-card(ng-bind='userxLocation(userX)')
-        .col.s12.m9.l9.offset-l3.offset-m3
-          .card
-            .card-content.p-0
-              .title-card
-                span.p-10 La tua cerchia
-              .col.s12.m6.l3(ng-repeat="userX in network")
-                ul.collection
-                  li.collection-item.avatar.recommendPeople-block(onclick="scroolTop()",ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
-                    img.circle(ng-src='{{userX.picture}}', alt='')
-                    span.name(ng-bind='userX.name')
-                    p
-                      span.item-card(ng-bind='userxLocation(userX)')
+      #card-stats
+        .row
+          .col.s12.m3.l3
+            .card
+              .card-content.p-0.stats-content
+                .title-card(style="background-color:#19768a")
+                  span statistiche
+                .stats-card
+                  p &nbsp;
+                  .container-line-vote.vote-one-line-color
+                    span.total-vote valutazioni ricevute
+                    .bullet-vote.vote-one-bullet-color(style="width:18%")
+                      span.effective-vote(ng-bind-html='stats.networkInCount')
+                .stats-card
+                  p &nbsp;
+                  .container-line-vote.vote-two-line-color
+                    span.total-vote valutazioni date
+                    .bullet-vote.vote-two-bullet-color(style="width:18%")
+                      span.effective-vote(ng-bind-html='stats.networkOutCount')
+                .stats-card
+                  p &nbsp;
+                  .container-line-vote.vote-three-line-color
+                    span.total-vote totale visualizzazioni
+                    .bullet-vote.vote-three-bullet-color(style="width:18%")
+                      span.effective-vote(ng-bind-html='user.views ? user.views : 0')
+          .col.s12.m9.l9.offset-m3
+            .card
+              .card-content.p-0
+                .title-card
+                  span.p-10 La tua cerchia
+                .col.s12.m6.l3(ng-repeat="userX in network")
+                  ul.collection
+                    li.collection-item.avatar.recommendPeople-block(onclick="scroolTop()",ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
+                      img.circle(ng-src='{{userX.picture}}', alt='')
+                      span.name(ng-bind='userX.name')
+                      p
+                        span.item-card(ng-bind='userxLocation(userX)')
             //.card-reveal
               span.card-title.grey-text.text-darken-4
                 | Roger Waters 
