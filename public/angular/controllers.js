@@ -296,7 +296,14 @@ angular.module('feelback')
               }
           }).success(function(data) {
               $scope.network = data;
-              console.log($scope.network);
+              User.stats($routeParams.id)
+              .error(function(err) {
+                  console.error(err);
+              })
+              .success(function(userStats) {
+                  console.log('User Stats: ', userStats);
+                  $scope.stats = userStats;
+              });
           });
         $scope.userLocation = function() {
             try {
