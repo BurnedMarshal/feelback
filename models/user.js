@@ -154,21 +154,23 @@ function getJudgement(refereeId, judgedId, next) {
 function judgements(startUserId, endUserId, next) {
     var cypher = `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(b) " +
-            "WHERE NOT(a.uuid = b.uuid) AND NOT(a.uuid = x1.uuid) AND r1.average >= 3 " +
+            "WHERE NOT(a.uuid = b.uuid) AND NOT(a.uuid = x1.uuid) AND NOT(b.uuid = x1.uuid) AND r1.average >= 3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(b) " +
-            "WHERE NOT(a.uuid = x2.uuid) AND NOT(b.uuid = x1.uuid) AND NOT(x2.uuid = x1.uuid) AND r1.average >= 3 AND r2.average >=3 " +
+            "WHERE NOT(a.uuid = x1.uuid) AND NOT(x2.uuid = x1.uuid) AND NOT(x2.uuid = b.uuid) AND NOT(x2.uuid = a.uuid) AND NOT(b.uuid = x1.uuid) " +
+            "AND r1.average >= 3 AND r2.average >=3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(x3)-[r4:judge]->(b) " +
-            "WHERE NOT(x1.uuid = x3.uuid) AND NOT(a.uuid = x2.uuid) AND NOT(x1.uuid = x2.uuid) AND NOT(x3.uuid = x2.uuid) AND NOT(x3.uuid = a.uuid) AND NOT(x3.uuid = x1.uuid) AND NOT(b.uuid = x2.uuid) " +
+            "WHERE NOT(x1.uuid = a.uuid) AND NOT(x1.uuid = x3.uuid) AND NOT(a.uuid = x2.uuid) AND NOT(x1.uuid = x2.uuid) " +
+            "AND NOT(x1.uuid = b.uuid) AND NOT(x3.uuid = x2.uuid) AND NOT(x3.uuid = a.uuid) AND NOT(x3.uuid = x1.uuid) AND NOT(b.uuid = x2.uuid) AND NOT(b.uuid = x3.uuid) " +
             "AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3 " +
             "WITH p, relationships(p) as rcoll " +
             "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
@@ -214,24 +216,26 @@ function judgements(startUserId, endUserId, next) {
 function judgementsExtended(startUserId, endUserId, next) {
     var cypher = `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(b) " +
-            "WHERE NOT(a.uuid = b.uuid) AND NOT(a.uuid = x1.uuid) AND r1.average >= 3 " +
-            "WITH collect(extract(n IN nodes(p)| n.name)) as names, relationships(p) as rcoll " +
-            "RETURN {users: names, average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "WHERE NOT(a.uuid = b.uuid) AND NOT(a.uuid = x1.uuid) AND NOT(b.uuid = x1.uuid) AND r1.average >= 3 " +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(b) " +
-            "WHERE NOT(a.uuid = x2.uuid) AND NOT(b.uuid = x1.uuid) AND NOT(x2.uuid = x1.uuid) AND r1.average >= 3 AND r2.average >=3 " +
-            "WITH collect(extract(n IN nodes(p)| n.name)) as names, relationships(p) as rcoll " +
-            "RETURN {users: names, average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "WHERE NOT(a.uuid = x1.uuid) AND NOT(x2.uuid = x1.uuid) AND NOT(x2.uuid = b.uuid) AND NOT(x2.uuid = a.uuid) AND NOT(b.uuid = x1.uuid) " +
+            "AND r1.average >= 3 AND r2.average >=3 " +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement " +
             "UNION " +
             `OPTIONAL MATCH (a:User {uuid:'${startUserId}'}), (b:User {uuid:'${endUserId}'}) WITH a, b ` +
             "MATCH p=(a)-[r1:judge]->(x1)-[r2:judge]->(x2)-[r3:judge]->(x3)-[r4:judge]->(b) " +
-            "WHERE NOT(x1.uuid = x3.uuid) AND NOT(a.uuid = x2.uuid) AND NOT(x1.uuid = x2.uuid) AND NOT(x3.uuid = x2.uuid) AND NOT(x3.uuid = a.uuid) AND NOT(x3.uuid = x1.uuid) AND NOT(b.uuid = x2.uuid) " +
+            "WHERE NOT(x1.uuid = a.uuid) AND NOT(x1.uuid = x3.uuid) AND NOT(a.uuid = x2.uuid) AND NOT(x1.uuid = x2.uuid) " +
+            "AND NOT(x1.uuid = b.uuid) AND NOT(x3.uuid = x2.uuid) AND NOT(x3.uuid = a.uuid) AND NOT(x3.uuid = x1.uuid) AND NOT(b.uuid = x2.uuid) AND NOT(b.uuid = x3.uuid) " +
             "AND r1.average >= 3 AND r2.average >= 3 AND r3.average >= 3 " +
-            "WITH collect(extract(n IN nodes(p)| n.name)) as names, relationships(p) as rcoll " +
-            "RETURN {users: names, average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
+            "WITH p, relationships(p) as rcoll " +
+            "RETURN p, {average: reduce(judge=5, x in rcoll| judge * x.average/5), etical: reduce(judge=5.0, x in rcoll| judge * x.etical/5), " +
             "personal: reduce(judge=5.0, x in rcoll| judge * x.personal/5), professional:reduce(judge=5.0, x in rcoll| judge * x.professional/5) } as judgement ";
     db.query(cypher, {}, function(err, results) {
         'use strict';
