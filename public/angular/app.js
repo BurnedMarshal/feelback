@@ -1,5 +1,5 @@
 /* global angular*/
-angular.module('feelback', ['ngRoute', 'pascalprecht.translate', 'satellizer', 'ngStorage', 'ngSanitize'])
+angular.module('feelback', ['ngRoute', 'pascalprecht.translate', 'satellizer', 'ngStorage', 'ngSanitize', 'angucomplete-alt'])
     .config(['$translateProvider', '$authProvider', function($translateProvider, $authProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: '/languages/locale-',

@@ -82,6 +82,10 @@ angular.module('feelback')
             $('#modalSearch').closeModal();
             $location.path(path);
         };
+
+        $scope.selectedPerson = function(value) {
+            $location.path('/' + $scope.lang + '/users/' + value.originalObject.uuid);
+        };
     }])
   .controller('homeController', ['$scope', '$auth', 'Account', '$localStorage', '$location', function($scope, $auth, Account, $localStorage, $location) {
       console.log('homeController');
