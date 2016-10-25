@@ -13,10 +13,10 @@
 }
 
 #profile-card .profile-image{
-  width: 140px;
+  width: 120px;
   display: block;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 a.vote-button{
