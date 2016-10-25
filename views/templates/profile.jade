@@ -55,8 +55,7 @@ section#content
                   li.collection-item.avatar.recommendPeople-block(onclick="scroolTop()",ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
                     img.circle(ng-src='{{userX.picture}}', alt='')
                     span.name(ng-bind='userX.name')
-                    p
-                      span.item-card(ng-bind='userxLocation(userX)')
+                    p.item-card.text-truncate(ng-bind='userxLocation(userX)')
           .card
             .card-content.p-0
               .title-card
@@ -66,7 +65,6 @@ section#content
                   li.collection-item.avatar.recommendPeople-block(onclick="scroolTop()",ng-click="goTo('/' + lang + '/users/' + userX.uuid)")
                     img.circle(ng-src='{{userX.picture}}', alt='')
                     span.name(ng-bind='userX.name')
-                    p
-                      span.item-card(ng-bind='userxLocation(userX)')
+                    p.item-card.text-truncate(ng-bind='userxLocation(userX)')
               
 //include ../partials/footer.jade
