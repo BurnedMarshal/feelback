@@ -316,3 +316,37 @@ header .brand-logo{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+
+/** Angucomplete seach **/
+
+
+#ex2_dropdown img.angucomplete-image{
+  width: 40px;
+  border-radius: 50%;
+  float: left;
+  margin: 10px;
+}
+
+#ex2_dropdown .angucomplete-title{
+  color: #000;
+}
+
+#ex2_dropdown .angucomplete-row{
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+#ex2_dropdown .angucomplete-row:hover, #ex2_dropdown .angucomplete-row:last-child:hover {
+  background-color: #efecec;
+  cursor: pointer;
+}
+
+#ex2_dropdown .angucomplete-row:last-child{
+  background-color: #fff;
+  border-bottom: 0px solid #ccc;
+}
+
+div#ex2_dropdown{
+  border: 1px solid #ccc;
+}
