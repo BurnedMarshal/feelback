@@ -323,9 +323,10 @@ header .brand-logo{
 
 #ex2_dropdown img.angucomplete-image{
   width: 40px;
+  height: 40px;
   border-radius: 50%;
   float: left;
-  margin: 10px;
+  margin: 10px 5px;
 }
 
 #ex2_dropdown .angucomplete-title{
@@ -349,4 +350,9 @@ header .brand-logo{
 
 div#ex2_dropdown{
   border: 1px solid #ccc;
+}
+
+#ex2_dropdown.angucomplete-dropdown {
+overflow-y: auto;
+  max-height: 400px;
 }

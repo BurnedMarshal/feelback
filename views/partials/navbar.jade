@@ -14,7 +14,7 @@ header#header.page-topbar
             li
               .input-field.col.s12
                 //input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
-                angucomplete-alt(id="ex2", placeholder="Nome", pause="300", selected-object="selectedPerson", selected-object-data='' remote-url='/api/v1/users/search?name=', title-field="name", image-field="picture", minlength="1", input-class="form-control form-control-small", match-class="highlight")
+                angucomplete-alt(id="ex2", placeholder="Cerca", pause="300", selected-object="selectedPerson", selected-object-data='' remote-url='/api/v1/users/search?name=', title-field="name", image-field="picture", minlength="1", input-class="form-control form-control-small", match-class="highlight")
                 //label(for='name') Nome
             li
               .waves-effect.waves-block.waves-light.show-search(ng-click='searchModal()')
