@@ -5,20 +5,20 @@ header#header.page-topbar
     nav.blue.darken-2
       .nav-wrapper
         .col.s12
-          a.brand-logo.darken-1(ng-href='/{{lang}}')
-            img(src="/images/epoca-logo.jpg", alt="Epoca logo", width='50')
-          //a.brand-logo(ng-href='/{{lang}}') Epoca
-          ul.right.search-bar
-            li.search-out(style='display: none;')
-              input.search-out-text(type='text')
+          ul.left.search-bar
+            li
+              a.brand-logo.darken-1(ng-href='/{{lang}}')
+                img(src="/images/epoca-logo.jpg", alt="Epoca logo", width='50')
+                //a.brand-logo(ng-href='/{{lang}}') Epoca
             li
               .input-field.col.s12
                 //input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
-                angucomplete-alt(id="ex2", placeholder="Cerca", pause="300", selected-object="selectedPerson", selected-object-data='' remote-url='/api/v1/users/search?name=', title-field="name", image-field="picture", minlength="1", input-class="form-control form-control-small", match-class="highlight")
+                angucomplete-alt(id="ex2", placeholder="Cerca persone", pause="300", selected-object="selectedPerson", selected-object-data='' remote-url='/api/v1/users/search?name=', title-field="name", image-field="picture", minlength="1", input-class="form-control form-control-small", match-class="highlight")
                 //label(for='name') Nome
+          ul.right.search-bar
             li
               .waves-effect.waves-block.waves-light.show-search(ng-click='searchModal()')
-                i.mdi-action-search
+                img.advanced-search(src="/images/ricerca-avanzata.svg", alt="ricerca avanzata", width='25')
             li
               a.dropdown-button(href='#!', data-activates='login-dropdown')
                 i.mdi-navigation-more-vert

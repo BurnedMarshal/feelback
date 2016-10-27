@@ -287,8 +287,61 @@ h1.text-title-cover{
 }
 
 header .brand-logo{
-  padding: 7px 18px;
+  padding: 7px 12px;
   margin: 0;
+  height: 64px;
+}
+
+nav .brand-logo{
+  position: static;
+}
+
+nav ul li{
+  height: 64px!important;
+}
+
+@media screen and (max-width: 600px) {
+  .search-bar {
+    padding: 0;
+  }
+}
+
+.navbar-fixed {
+  position: relative;
+  height: 64px!important;
+  z-index: 998;
+}
+
+nav {
+  height: 64px;
+  line-height: 64px;
+}
+
+@media only screen and (max-width: 601px) {
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 64px;
+    line-height: 64px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    left: 50%;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.advanced-search{
+  width: 25px;
+  margin: 22px 20px;
+}
+
+.login-icon{
+
 }
 
 .recommendPeople-block{
@@ -331,6 +384,7 @@ header .brand-logo{
 
 #ex2_dropdown .angucomplete-title{
   color: #000;
+  text-align: left;
 }
 
 #ex2_dropdown .angucomplete-row{
@@ -355,4 +409,9 @@ div#ex2_dropdown{
 #ex2_dropdown.angucomplete-dropdown {
 overflow-y: auto;
   max-height: 400px;
+}
+
+#ex2_dropdown .angucomplete-searching {
+  background-color: #fff;
+  color: #000;
 }
