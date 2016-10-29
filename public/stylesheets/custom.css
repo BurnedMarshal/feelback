@@ -415,3 +415,19 @@ overflow-y: auto;
   background-color: #fff;
   color: #000;
 }
+
+.facebook-login{
+  background-color: #3b5998;
+  color: #ffffff;
+  height: 50px;
+  text-transform: none;
+}
+
+.facebook-login:hover, .facebook-login:focus{
+  background-color: #3b5998;
+  opacity: 0.9;
+}
+
+body.cyan{
+  background-color: #127dc1 !important;
+}
