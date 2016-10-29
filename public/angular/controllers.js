@@ -43,6 +43,7 @@ angular.module('feelback')
 
         $scope.searchModal = function() {
             $('#modalSearch').openModal();
+
         };
 
         $scope.recommendedPeople = function() {
