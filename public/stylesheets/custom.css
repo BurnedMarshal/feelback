@@ -242,6 +242,13 @@ h1.text-title-cover{
   .search-bar{
     padding: 14px;
   }
+
+  .search-user{
+    background-color: rgba(0, 0, 0, 0.1);
+    width: auto!important;
+  }
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -430,4 +437,13 @@ overflow-y: auto;
 
 body.cyan{
   background-color: #127dc1 !important;
+}
+
+.search-user{
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.dropdown-content a{
+  color: #127dc1!important;
 }

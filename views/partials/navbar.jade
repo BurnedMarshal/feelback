@@ -5,12 +5,11 @@ header#header.page-topbar
     nav.blue.darken-2
       .nav-wrapper
         .col.s12
+          a.brand-logo.darken-1.left(ng-href='/{{lang}}')
+            img(src="/images/epoca-logo.jpg", alt="Epoca logo", width='50')
+            //a.brand-logo(ng-href='/{{lang}}') Epoca
           ul.left.search-bar
-            li
-              a.brand-logo.darken-1(ng-href='/{{lang}}')
-                img(src="/images/epoca-logo.jpg", alt="Epoca logo", width='50')
-                //a.brand-logo(ng-href='/{{lang}}') Epoca
-            li
+            li.search-user
               .input-field.col.s12
                 //input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
                 angucomplete-alt(id="ex2", placeholder="Cerca persone", pause="300", selected-object="selectedPerson", selected-object-data='' remote-url='/api/v1/users/search?name=', title-field="name", image-field="picture", minlength="1", input-class="form-control form-control-small", match-class="highlight")
@@ -24,7 +23,8 @@ header#header.page-topbar
                 i.mdi-navigation-more-vert
               ul#login-dropdown.dropdown-content
                 li
-                  a.-text(ng-href='/{{lang}}/login', ng-if='!loggedIn()') Login
-                  a.-text(href='#!', ng-click='logout()' ng-if='loggedIn()') Logout
+                  a.text(ng-href='/{{lang}}/login', ng-if='!loggedIn()') Login
+                  a.text(href='#!', ng-click='logout()' ng-if='loggedIn()') Logout
+
   // end header nav
 // END HEADER
