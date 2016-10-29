@@ -20,8 +20,8 @@ section#content
             .row
               .col.s12
                 h1.text-center.text-title-cover Che tipo di relazione hai con questa persona?
-            .row.vote-button-row
-              .col.s12.m12.l12
+            .vote-button-row
+              .col.s12.m12.l12.p-0
                 a#friend.vote-button.waves-effect.waves-light.btn.darken-2.modal-trigger(ng-click='vote("amico")', ng-class="directJudgement.type === 'amico' ? 'yellow' : 'blue'") amico
                 a#family.vote-button.waves-effect.waves-light.btn.darken-2(ng-click='vote("parente")', ng-class="directJudgement.type === 'parente' ? 'yellow' : 'blue'") parente
                 a#work.vote-button.waves-effect.waves-light.btn.blue.darken-2(ng-click='vote("collega")', ng-class="directJudgement.type === 'collega' ? 'yellow' : 'blue'") collega
