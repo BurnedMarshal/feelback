@@ -458,13 +458,13 @@ input[type=range] + .thumb, input[type=range]::-webkit-slider-thumb{
 }
 
 input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 2px solid #127dc1;
+  border-bottom: 1px solid #127dc1;
   box-shadow: 0 2px 0 0 #127dc1;
 }
 
 #modalSearch input[type=text].valid{
-  border-bottom: 2px solid #c2c0c2;
-  box-shadow: 0 2px 0 0 #c2c0c2;
+  border-bottom: 1px solid #c2c0c2;
+  box-shadow: 0 1px 0 0 #c2c0c2;
 }
 
 #modalSearch input[type=range]::-webkit-slider-runnable-track {
@@ -476,11 +476,23 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 #modalSearch input[type=text] {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #c2c0c2;
+  border-bottom: 1px solid #c2c0c2;
 }
 
 #modalSearch input[type=range]::-webkit-slider-thumb{
   margin: -6px 0 0 0;
+}
+
+#modalSearch .close-modal{
+  margin: 20px;
+}
+
+#modalSearch .close-modal i{
+  font-size: 40px;
+}
+
+#modalSearch .close-modal i:hover{
+  color: #127dc1;
 }
 
 .input-field label{

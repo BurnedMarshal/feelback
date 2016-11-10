@@ -4,6 +4,8 @@ include ./partials/loader
 block content
   div(ng-view='')
   #modalSearch.modal.bottom-sheet
+      a.modal-close.right.close-modal
+        i.mdi-navigation-close
       .modal-content
         .row
           .input-field.col.s12.m3.l3
