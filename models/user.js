@@ -16,6 +16,7 @@ module.exports = {
     getJudgement: getJudgement,
     network: network,
     search: search,
+    extendedSearch: extendedSearch,
     recommendedPeople: recommendedPeople,
     deleteJudgement: deleteJudgement,
     networkCount: networkCount,
@@ -272,6 +273,35 @@ function network(userId, next) {
  */
 function search(name, next) {
     var searchCypher = `MATCH (n:User) WHERE n.name =~ "(?i).*${name}.*" AND NOT(EXISTS(n.isTemp)) RETURN n`;
+    db.query(searchCypher, {}, function(err, results) {
+        if (err) {
+            console.log(err);
+            return next(err, null);
+        }
+        if (results && results.length > 0) {
+            next(null, results);
+        } else {
+            next(null, null);
+        }
+    });
+}
+
+/**
+ * Search all users in current user network
+ * @param  {[type]}   userId [description]
+ * @param  {[type]}   params [description]
+ * @param  {Function} next   [description]
+ */
+function extendedSearch(userId, params, next) {
+    var searchCypher = `MATCH (me:User)-[1..4:judge]->(n:User) WHERE me.uuid = '${userId}' `;
+    for (var queryKey in params) {
+        if (typeof params[queryKey] === String) {
+            searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*"' `;
+        } else {
+            searchCypher += `AND n.${queryKey} <= ${params[queryKey]} `;
+        }
+    }
+
     db.query(searchCypher, {}, function(err, results) {
         if (err) {
             console.log(err);
