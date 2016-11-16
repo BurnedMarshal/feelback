@@ -4,7 +4,47 @@ include ./partials/loader
 block content
   div(ng-view='')
   #modalSearch.modal.bottom-sheet
+      a.modal-close.right.close-modal
+        i.mdi-navigation-close
       .modal-content
+        .row
+          .input-field.col.s12.m3.l3
+            input#search_city.validate(type='text')
+            label(for='search_city') Città
+          .input-field.col.s12.m3.l3
+            input#search_prof.validate(type='text')
+            label(for='search_prof') Professione
+        .row
+          .col.s12.m3.l3
+            p Età minima
+            form(action='#')
+              p.range-field
+                input#eta-min(type='range', min='0', max='100')
+                span.thumb.active
+                //  span.value
+          .col.s12.m3.l3
+            p Età massima
+            form(action='#')
+              p.range-field
+                input#eta-max(type='range', min='0', max='100')
+        .row
+          .col.s12.m3.l3
+            p Punteggio sfera personale
+            form(action='#')
+              p.range-field
+                input#sfera-personale(type='range', min='0', max='100')
+                //span.thumb
+                //  span.value
+          .col.s12.m3.l3
+            p Punteggio sfera etica
+            form(action='#')
+              p.range-field
+                input#sfera-etica(type='range', min='0', max='100')
+          .col.s12.m3.l3
+            p Punteggio sfera professionale
+            form(action='#')
+              p.range-field
+                input#sfera-professionale(type='range', min='0', max='100')
         .row
           .input-field.col.s12
             input#name.validate(type='text', ng-model='searchString', ng-change='searchQuery()')
