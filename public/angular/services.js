@@ -20,17 +20,31 @@ angular.module('feelback')
           },
           extendedSearch: function(location, work, minAge, maxAge) {
               var apiUrl = '/api/v1/users/ext_search?';
+              var args = false;
               if (location) {
                   apiUrl += 'location=' + location;
+                  args = true;
               }
               if (work) {
+                  if (args) {
+                      apiUrl += '&';
+                  }
                   apiUrl += 'work=' + work;
+                  args = true;
               }
               if (minAge) {
+                  if (args) {
+                      apiUrl += '&';
+                  }
                   apiUrl += 'minAge=' + minAge;
+                  args = true;
               }
               if (maxAge) {
+                  if (args) {
+                      apiUrl += '&';
+                  }
                   apiUrl += 'minAge=' + maxAge;
+                  args = true;
               }
               return $http.get(apiUrl);
           },
