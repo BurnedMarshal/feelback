@@ -294,19 +294,14 @@ function search(name, next) {
  */
 function extendedSearch(userId, params, next) {
     var searchCypher = `MATCH (me:User)-[r:judge*1..4]->(n:User) WHERE me.uuid = '${userId}' `;
-    console.log('PARAMS: ', params);
+    var hasDate = false;
     for (var queryKey in params) {
         if (Object.hasOwnProperty.call(params, queryKey)) {
             if (typeof params[queryKey] === 'string') {
                 searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
-            } else {
-                var dateString = params[queryKey].getDate() + '/' + params[queryKey].getMonth() + '/' + params[queryKey].getFullYear();
-                if (queryKey === 'minAge') {
-                    searchCypher += `AND n.birtday >= '${dateString}' `;
-                }
-                if (queryKey === 'maxAge') {
-                    searchCypher += `AND n.birtday <= '${dateString}' `;
-                }
+            } else if (!hasDate) {
+                hasDate = true;
+                searchCypher += 'AND HAS(n.birtday) ';
             }
         }
     }
@@ -314,11 +309,31 @@ function extendedSearch(userId, params, next) {
     searchCypher += 'RETURN DISTINCT n';
 
     db.query(searchCypher, {}, function(err, results) {
+        'use strict';
         if (err) {
             console.log(err);
             return next(err, null);
         }
         if (results && results.length > 0) {
+            var checkDate = null;
+            for (let i = 0; i < results.length; i++) {
+                if (hasDate && params.minAge) {
+                    checkDate = new Date(results[i].birtday.split('/')[2], results[i].birtday.split('/')[1], results[i].birtday.split('/')[0]);
+                    if (checkDate < params.minAge) {
+                        results.splice(i, 1);
+                        i--;
+                        next();
+                    }
+                }
+                if (hasDate && params.maxAge) {
+                    checkDate = new Date(results[i].birtday.split('/')[2], results[i].birtday.split('/')[1], results[i].birtday.split('/')[0]);
+                    if (checkDate > params.maxAge) {
+                        results.splice(i, 1);
+                        i--;
+                        next();
+                    }
+                }
+            }
             next(null, results);
         } else {
             next(null, null);
