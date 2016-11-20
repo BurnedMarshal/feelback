@@ -70,6 +70,9 @@ angular.module('feelback')
             }
         };
 
+        $scope.minAge = 0;
+        $scope.maxAge = 100;
+
         $scope.extendedSearch = function() {
             User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge, $scope.searchString)
               .success(function(data) {
