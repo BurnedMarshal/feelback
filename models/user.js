@@ -313,7 +313,6 @@ function extendedSearch(userId, params, next) {
     searchCypher += 'RETURN DISTINCT n';
 
     db.query(searchCypher, {}, function(err, results) {
-        console.log('risultati: ', results);
         if (err) {
             console.log(err);
             return next(err, null);
