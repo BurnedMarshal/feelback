@@ -301,7 +301,7 @@ function extendedSearch(userId, params, next) {
                 searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
             } else if (!hasDate) {
                 hasDate = true;
-                searchCypher += 'AND HAS(n.birtday) ';
+                searchCypher += 'AND EXISTS(n.birtday) ';
             }
         }
     }
