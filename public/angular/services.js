@@ -18,7 +18,7 @@ angular.module('feelback')
           search: function(query) {
               return $http.get('/api/v1/users/search?name=' + query);
           },
-          extendedSearch: function(location, work, minAge, maxAge) {
+          extendedSearch: function(location, work, minAge, maxAge, name) {
               var apiUrl = '/api/v1/users/ext_search?';
               var args = false;
               if (location) {
@@ -45,6 +45,12 @@ angular.module('feelback')
                   }
                   apiUrl += 'maxAge=' + maxAge;
                   args = true;
+              }
+              if (name) {
+                  if (args) {
+                      apiUrl += '&';
+                  }
+                  apiUrl += 'name=' + name;
               }
               return $http.get(apiUrl);
           },

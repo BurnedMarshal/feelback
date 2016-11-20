@@ -71,13 +71,14 @@ angular.module('feelback')
         };
 
         $scope.extendedSearch = function() {
-            User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge)
+            User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge, $scope.searchString)
               .success(function(data) {
                   $scope.usersFound = data;
                   console.log(data);
               })
               .error(function(err, data) {
                   if (err) console.log(err);
+                  if (err.status === 404) $scope.usersFound = [];
               });
         };
 

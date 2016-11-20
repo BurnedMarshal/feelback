@@ -301,12 +301,13 @@ function extendedSearch(userId, params, next) {
                 searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
             } else if (!hasDate) {
                 hasDate = true;
-                searchCypher += 'AND EXISTS(n.birtday) ';
+                searchCypher += 'AND EXISTS(n.birthday) ';
             }
         }
     }
 
     searchCypher += 'RETURN DISTINCT n';
+    console.log(searchCypher);
 
     db.query(searchCypher, {}, function(err, results) {
         'use strict';
@@ -318,22 +319,27 @@ function extendedSearch(userId, params, next) {
             var checkDate = null;
             for (let i = 0; i < results.length; i++) {
                 if (hasDate && params.minAge) {
-                    checkDate = new Date(results[i].birtday.split('/')[2], results[i].birtday.split('/')[1], results[i].birtday.split('/')[0]);
-                    if (checkDate < params.minAge) {
+                    checkDate = new Date(results[i].birthday.split('/')[2], results[i].birthday.split('/')[1], results[i].birthday.split('/')[0]);
+                    console.log(checkDate);
+                    console.log(params.minAge);
+                    if (checkDate > params.minAge) {
                         results.splice(i, 1);
                         i--;
-                        next();
+                        continue;
                     }
                 }
                 if (hasDate && params.maxAge) {
-                    checkDate = new Date(results[i].birtday.split('/')[2], results[i].birtday.split('/')[1], results[i].birtday.split('/')[0]);
-                    if (checkDate > params.maxAge) {
+                    checkDate = new Date(results[i].birthday.split('/')[2], results[i].birthday.split('/')[1], results[i].birthday.split('/')[0]);
+                    console.log(checkDate);
+                    console.log(params.maxAge);
+                    if (checkDate < params.maxAge) {
                         results.splice(i, 1);
                         i--;
-                        next();
+                        continue;
                     }
                 }
             }
+            console.log(results);
             next(null, results);
         } else {
             next(null, null);
