@@ -45,16 +45,20 @@ router.get('/search', function(req, res) {
 });
 
 router.get('/ext_search', auth.ensureAuthenticated, function(req, res) {
-  var params = [];
-  if(req.query.location) params.push({location: req.query.location});
-  if(req.query.work) params.push({work: req.query.work});
+  var params = {};
+  if(req.query.location) params.location = req.query.location;
+  if(req.query.work) params.work = req.query.work;
 
-  if(req.query.age && req.query.age > 0) {
+  if(req.query.minAge && req.query.minAge > 0) {
     var today = new Date();
-    params.push({birtday: new Date(today.getFullYear()-req.query.age, today.getMonth()+1, today.getDate())});
+    params.minAge = new Date(today.getFullYear()-req.query.age, today.getMonth()+1, today.getDate());
+  }
+  if(req.query.maxAge && req.query.maxAge > 0) {
+    var today = new Date();
+    params.maxAge = new Date(today.getFullYear()-req.query.age, today.getMonth()+1, today.getDate());
   }
 
-  if(params.length === 0) return res.status(400).send({message: "Missing required params in query"});
+  if(Object.keys(params).length === 0) return res.status(400).send({message: "Missing required params in query"});
 
   User.extendedSearch(req.user, params, function(err, users) {
     'use strict';

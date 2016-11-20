@@ -18,6 +18,22 @@ angular.module('feelback')
           search: function(query) {
               return $http.get('/api/v1/users/search?name=' + query);
           },
+          extendedSearch: function(location, work, minAge, maxAge) {
+              var apiUrl = '/api/v1/users/ext_search?';
+              if (location) {
+                  apiUrl += 'location=' + location;
+              }
+              if (work) {
+                  apiUrl += 'work=' + work;
+              }
+              if (minAge) {
+                  apiUrl += 'minAge=' + minAge;
+              }
+              if (maxAge) {
+                  apiUrl += 'minAge=' + maxAge;
+              }
+              return $http.get(apiUrl);
+          },
           recommendedPeople: function(query) {
               return $http.get('/api/v1/users/recommendedPeople?name=' + query);
           },

@@ -293,16 +293,27 @@ function search(name, next) {
  * @param  {Function} next   [description]
  */
 function extendedSearch(userId, params, next) {
-    var searchCypher = `MATCH (me:User)-[1..4:judge]->(n:User) WHERE me.uuid = '${userId}' `;
+    var searchCypher = `MATCH (me:User)-[r:judge*1..4]->(n:User) WHERE me.uuid = '${userId}' `;
+    console.log('PARAMS: ', params);
     for (var queryKey in params) {
-        if (typeof params[queryKey] === String) {
-            searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*"' `;
-        } else {
-            searchCypher += `AND n.${queryKey} <= ${params[queryKey]} `;
+        if (Object.hasOwnProperty.call(params, queryKey)) {
+            if (typeof params[queryKey] === 'string') {
+                searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
+            } else {
+                if (queryKey === 'minAge') {
+                    searchCypher += `AND n.birtday >= ${params[queryKey]} `;
+                }
+                if (queryKey === 'maxAge') {
+                    searchCypher += `AND n.birtday <= ${params[queryKey]} `;
+                }
+            }
         }
     }
 
+    searchCypher += 'RETURN DISTINCT n';
+
     db.query(searchCypher, {}, function(err, results) {
+        console.log('risultati: ', results);
         if (err) {
             console.log(err);
             return next(err, null);

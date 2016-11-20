@@ -43,7 +43,6 @@ angular.module('feelback')
 
         $scope.searchModal = function() {
             $('#modalSearch').openModal();
-
         };
 
         $scope.recommendedPeople = function() {
@@ -69,6 +68,17 @@ angular.module('feelback')
             } else {
                 $scope.usersFound = null;
             }
+        };
+
+        $scope.extendedSearch = function() {
+          console.log('Invio la ricerca');
+            User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge)
+              .success(function(data) {
+                console.log(data);
+              })
+              .error(function(err, data) {
+                console.log(err);
+              })
         };
 
         $scope.userxLocation = function(userX) {

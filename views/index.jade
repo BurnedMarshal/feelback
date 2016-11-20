@@ -9,25 +9,27 @@ block content
       .modal-content
         .row
           .input-field.col.s12.m3.l3
-            input#search_city.validate(type='text')
+            input#search_city.validate(type='text', ng-model='searchLocation')
             label(for='search_city') Città
           .input-field.col.s12.m3.l3
-            input#search_prof.validate(type='text')
+            input#search_prof.validate(type='text', ng-model='searchWork')
             label(for='search_prof') Professione
         .row
           .col.s12.m3.l3
             p Età minima
             form(action='#')
               p.range-field
-                input#eta-min(type='range', min='0', max='100')
+                input#eta-min(type='range', min='0', max='100', ng-model='minAge')
                 span.thumb.active
                 //  span.value
           .col.s12.m3.l3
             p Età massima
             form(action='#')
               p.range-field
-                input#eta-max(type='range', min='0', max='100')
-        .row
+                input#eta-max(type='range', min='0', max='100', ng-model='maxAge')
+          .col.s12.m3.l3
+            button(ng-click='extendedSearch()') Search
+        //.row
           .col.s12.m3.l3
             p Punteggio sfera personale
             form(action='#')
