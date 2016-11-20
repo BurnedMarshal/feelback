@@ -300,11 +300,12 @@ function extendedSearch(userId, params, next) {
             if (typeof params[queryKey] === 'string') {
                 searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
             } else {
+                var dateString = params[queryKey].getDate() + '/' + params[queryKey].getMonth() + '/' + params[queryKey].getFullYear();
                 if (queryKey === 'minAge') {
-                    searchCypher += `AND n.birtday >= ${params[queryKey]} `;
+                    searchCypher += `AND n.birtday >= '${dateString}' `;
                 }
                 if (queryKey === 'maxAge') {
-                    searchCypher += `AND n.birtday <= ${params[queryKey]} `;
+                    searchCypher += `AND n.birtday <= '${dateString}' `;
                 }
             }
         }
