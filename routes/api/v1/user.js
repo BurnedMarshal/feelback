@@ -51,11 +51,11 @@ router.get('/ext_search', auth.ensureAuthenticated, function(req, res) {
 
   if(req.query.minAge && req.query.minAge > 0) {
     var today = new Date();
-    params.minAge = new Date(today.getFullYear()-req.query.age, today.getMonth()+1, today.getDate());
+    params.minAge = new Date(today.getFullYear()-req.query.minAge, today.getMonth()+1, today.getDate());
   }
   if(req.query.maxAge && req.query.maxAge > 0) {
     var today = new Date();
-    params.maxAge = new Date(today.getFullYear()-req.query.age, today.getMonth()+1, today.getDate());
+    params.maxAge = new Date(today.getFullYear()-req.query.maxAge, today.getMonth()+1, today.getDate());
   }
 
   if(Object.keys(params).length === 0) return res.status(400).send({message: "Missing required params in query"});

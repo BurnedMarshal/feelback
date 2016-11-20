@@ -78,7 +78,7 @@ angular.module('feelback')
               })
               .error(function(err, data) {
                   if (err) console.log(err);
-              })
+              });
         };
 
         $scope.userxLocation = function(userX) {

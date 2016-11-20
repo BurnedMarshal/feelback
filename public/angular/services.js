@@ -43,7 +43,7 @@ angular.module('feelback')
                   if (args) {
                       apiUrl += '&';
                   }
-                  apiUrl += 'minAge=' + maxAge;
+                  apiUrl += 'maxAge=' + maxAge;
                   args = true;
               }
               return $http.get(apiUrl);
