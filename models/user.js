@@ -301,7 +301,7 @@ function extendedSearch(userId, params, next) {
         if (Object.hasOwnProperty.call(params, queryKey)) {
             if (typeof params[queryKey] === 'string') {
                 searchCypher += `AND n.${queryKey} =~ "(?i).*${params[queryKey]}.*" `;
-            } else if (!hasDate) {
+            } else if (typeof params[queryKey] === 'object' && !hasDate) {
                 hasDate = true;
                 searchCypher += 'AND EXISTS(n.birthday) ';
             }
@@ -348,20 +348,22 @@ function extendedSearch(userId, params, next) {
                         judgements(userId, element.uuid, function(err, judgement) {
                             if (err) return reject(err);
                             if (params.personal) {
-                                if (judgement.personal < params.personal) {
+                                if (!judgement.personal || judgement.personal < params.personal) {
+                                    console.log("EXCLUDE");
                                     return resolve();
                                 }
                             }
                             if (params.etical) {
-                                if (judgement.etical < params.etical) {
+                                if (!judgement.etical || judgement.etical < params.etical) {
                                     return resolve();
                                 }
                             }
                             if (params.professional) {
-                                if (judgement.professional < params.professional) {
+                                if (!judgement.professional || judgement.professional < params.professional) {
                                     return resolve();
                                 }
                             }
+                            console.log("INCLUDE");
                             finalResults.push(element);
                             resolve();
                         });
@@ -369,12 +371,14 @@ function extendedSearch(userId, params, next) {
                     promiseSync.push(checkJudgementPromise);
                 }
                 Promise.all(promiseSync).then(function() {
-                    return next(null, finalResults);
+                    console.log("SEND DATA FILTERED: ", finalResults);
+                    next(null, finalResults);
                 }).catch(function(err) {
-                    return next(err, null);
+                    next(err, null);
                 });
+            } else {
+                next(null, results);
             }
-            next(null, results);
         } else {
             next(null, null);
         }
