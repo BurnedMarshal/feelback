@@ -49,6 +49,9 @@ router.get('/ext_search', auth.ensureAuthenticated, function(req, res) {
   if(req.query.location) params.location = req.query.location;
   if(req.query.work) params.work = req.query.work;
   if(req.query.name) params.name = req.query.name;
+  if(req.query.personal) params.personal = parseInt(req.query.personal, 10);
+  if(req.query.etical) params.etical = parseInt(req.query.etical, 10);
+  if(req.query.professional) params.professional = parseInt(req.query.professional, 10);
 
   if(req.query.minAge && req.query.minAge > 0) {
     var today = new Date();

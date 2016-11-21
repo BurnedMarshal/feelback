@@ -74,7 +74,8 @@ angular.module('feelback')
         $scope.maxAge = 100;
 
         $scope.extendedSearch = function() {
-            User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge, $scope.searchString)
+            User.extendedSearch($scope.searchLocation, $scope.searchWork, $scope.minAge, $scope.maxAge,
+              $scope.minPersonal, $scope.minEtical, $scope.minProfessional, $scope.searchString)
               .success(function(data) {
                   $scope.usersFound = data;
                   console.log(data);

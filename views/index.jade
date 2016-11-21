@@ -27,24 +27,24 @@ block content
             form(action='#')
               p.range-field
                 input#eta-max(type='range', min='0', max='100', ng-model='maxAge')
-        //.row
+        .row
           .col.s12.m3.l3
             p Punteggio sfera personale
             form(action='#')
               p.range-field
-                input#sfera-personale(type='range', min='0', max='100')
+                input#sfera-personale(type='range', min='0', max='5', ng-model='minPersonal')
                 //span.thumb
                 //  span.value
           .col.s12.m3.l3
             p Punteggio sfera etica
             form(action='#')
               p.range-field
-                input#sfera-etica(type='range', min='0', max='100')
+                input#sfera-etica(type='range', min='0', max='5', ng-model='minEtical')
           .col.s12.m3.l3
             p Punteggio sfera professionale
             form(action='#')
               p.range-field
-                input#sfera-professionale(type='range', min='0', max='100')
+                input#sfera-professionale(type='range', min='0', max='5', ng-model='minProfessional')
         .row
           .input-field.col.s12.m11.l11
             input#name.validate(type='text', ng-model='searchString')
