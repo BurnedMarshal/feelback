@@ -295,6 +295,8 @@ function search(name, next) {
 function extendedSearch(userId, params, next) {
     var searchCypher = `MATCH (me:User)-[r:judge*1..4]->(n:User) WHERE me.uuid = '${userId}' `;
     var hasDate = false;
+    var finalResults = [];
+    var promiseSync = [];
     for (var queryKey in params) {
         if (Object.hasOwnProperty.call(params, queryKey)) {
             if (typeof params[queryKey] === 'string') {
@@ -339,7 +341,39 @@ function extendedSearch(userId, params, next) {
                     }
                 }
             }
-            console.log(results);
+            if (params.personal || params.professional || params.etical) {
+                for (let i = 0; i < results.length; i++) {
+                    let element = results[i];
+                    var checkJudgementPromise = new Promise(function(reject, resolve) {
+                        judgements(userId, element.uuid, function(err, judgement) {
+                            if (err) return reject(err);
+                            if (params.personal) {
+                                if (judgement.personal < params.personal) {
+                                    return resolve();
+                                }
+                            }
+                            if (params.etical) {
+                                if (judgement.etical < params.etical) {
+                                    return resolve();
+                                }
+                            }
+                            if (params.professional) {
+                                if (judgement.professional < params.professional) {
+                                    return resolve();
+                                }
+                            }
+                            finalResults.push(element);
+                            resolve();
+                        });
+                    });
+                    promiseSync.push(checkJudgementPromise);
+                }
+                Promise.all(promiseSync).then(function() {
+                    return next(null, finalResults);
+                }).catch(function(err) {
+                    return next(err, null);
+                });
+            }
             next(null, results);
         } else {
             next(null, null);
