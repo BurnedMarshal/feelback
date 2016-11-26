@@ -46,11 +46,8 @@ block content
               p.range-field
                 input#sfera-professionale(type='range', min='0', max='5', ng-model='minProfessional')
         .row
-          .input-field.col.s12.m11.l11
-            input#name.validate(type='text', ng-model='searchString')
-            label(for='name') Nome
           .col.s12.m1.l1
-            button(type='button', ng-click='extendedSearch()') Search
+            button.btn.waves-effect.waves-light.btn-epocha-color(type='button', ng-click='extendedSearch()') Search
         .row
           ul.collection.search-user.col.s12.m6.l4(ng-if='usersFound')
             li.collection-item.avatar(ng-repeat='user in usersFound', ng-if='$index < 7')
